@@ -7,13 +7,13 @@ pipeline {
     }
 
     stages {
-        stage('1. Checkout (5 Puan)') {
+        stage('1. Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('2. Build (5 Puan)') {
+        stage('2. Build') {
             steps {
                 dir('car-rental-system-backend') {
                     bat 'mvn clean install -DskipTests'
@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-        stage('3. Birim Testleri (15 Puan)') {
+        stage('3. Birim Testleri') {
             steps {
                 dir('car-rental-system-backend') {
                     // Sadece Unit Testleri çalıştırır
@@ -36,7 +36,7 @@ pipeline {
             }
         }
 
-        stage('4. Entegrasyon Testleri (15 Puan)') {
+        stage('4. Entegrasyon Testleri') {
             steps {
                 dir('car-rental-system-backend') {
                     // Integration testleri genellikle 'verify' fazında çalışır
