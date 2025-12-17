@@ -1,70 +1,142 @@
-# Getting Started with Create React App
+# 🚗 Car Rental System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A robust and modern full-stack car rental application designed to streamline vehicle booking and management. Built with **Spring Boot** for the backend and **React** for the frontend, this system offers a seamless experience for both customers and administrators.
 
-## Available Scripts
+![Project Banner](https://placehold.co/1200x400?text=Car+Rental+System+Preview)
+*(Replace this link with a real screenshot of your application)*
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🌟 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 👤 User Panel
+- **User Authentication:** Secure registration and login (JWT-based).
+- **Vehicle Browsing:** View available cars with detailed descriptions and images.
+- **Booking System:** Easy-to-use interface to book vehicles for specific dates.
+- **My Bookings:** track status of past and current reservations.
+- **Responsive Design:** Fully optimized for desktop and mobile devices.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🛡️ Admin Dashboard
+- **Dashboard Overview:** key metrics and statistics.
+- **Car Management:** Add, update, and remove vehicles from the fleet.
+- **Booking Management:** Approve or reject customer reservations.
+- **User Management:** Oversee registered users.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Tech Stack
 
-### `npm run build`
+### Frontend
+- **Framework:** [React](https://reactjs.org/) (v18)
+- **Styling:** [Bootstrap 5](https://getbootstrap.com/), [React Bootstrap](https://react-bootstrap.github.io/)
+- **HTTP Client:** [Axios](https://axios-http.com/)
+- **Routing:** [React Router DOM](https://reactrouter.com/) (v6)
+- **Notifications:** [React Toastify](https://fkhadra.github.io/react-toastify/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Backend
+- **Framework:** [Spring Boot](https://spring.io/projects/spring-boot) (v3.2.3)
+- **Language:** Java 17
+- **Security:** Spring Security & JWT (JSON Web Tokens)
+- **Database Search:** Spring Data JPA
+- **Database:** PostgreSQL
+- **PDF Generation:** OpenPDF
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📂 Project Structure
 
-### `npm run eject`
+The project is divided into two main applications:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+*   **`car-rental-system-backend`**: RESTful API server.
+*   **`car-rental-system-frontend`**: React single-page application.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🏁 Getting Started
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Follow these instructions to set up the project locally.
 
-## Learn More
+### Prerequisites
+- **Node.js** and **npm** installed.
+- **Java Development Kit (JDK) 17** or later.
+- **Maven** installed.
+- **PostgreSQL** installed and running.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 🔙 Backend Setup
 
-### Code Splitting
+1.  **Navigate to the backend directory:**
+    ```bash
+    cd car-rental-system-backend
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2.  **Configure Database:**
+    *   Create a PostgreSQL database (e.g., `car_rental_db`).
+    *   Open `src/main/resources/application.properties` (or `application.yml`) and update the database credentials:
+        ```properties
+        spring.datasource.url=jdbc:postgresql://localhost:5432/car_rental_db
+        spring.datasource.username=your_username
+        spring.datasource.password=your_password
+        ```
 
-### Analyzing the Bundle Size
+3.  **Run the Application:**
+    You can run it using the Maven wrapper or your IDE.
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+    The backend server will start on `http://localhost:8080`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+### 🖥️ Frontend Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1.  **Navigate to the frontend directory:**
+    ```bash
+    cd car-rental-system-frontend
+    ```
 
-### Advanced Configuration
+2.  **Install Dependencies:**
+    ```bash
+    npm install
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+3.  **Configure API Endpoint (Optional):**
+    If your backend runs on a different port, check the Axios configuration (usually in a `service` folder or environment file) to ensure it points to the correct backend URL.
 
-### Deployment
+4.  **Start the Development Server:**
+    ```bash
+    npm start
+    ```
+    The application will open in your browser at `http://localhost:3000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 📸 Screenshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Home Page | Car Details |
+|-----------|-------------|
+| ![Home](https://placehold.co/600x400?text=Home+Page) | ![Detail](https://placehold.co/600x400?text=Car+Details) |
+
+| Admin Dashboard | Booking Flow |
+|-----------------|--------------|
+| ![Admin](https://placehold.co/600x400?text=Admin+Dashboard) | ![Booking](https://placehold.co/600x400?text=Booking+Flow) |
+
+*(Replace these placeholders with actual screenshots from your `license-image` or `variant-image` folders)*
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+1.  Fork the repository.
+2.  Create a feature branch (`git checkout -b feature/NewFeature`).
+3.  Commit your changes (`git commit -m 'Add NewFeature'`).
+4.  Push to the branch (`git push origin feature/NewFeature`).
+5.  Open a Pull Request.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
