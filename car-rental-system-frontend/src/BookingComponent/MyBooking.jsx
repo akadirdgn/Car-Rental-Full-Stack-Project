@@ -16,7 +16,7 @@ const MyBooking = () => {
   const retrieveAllBookings = async () => {
     const response = await axios.get(
       "http://localhost:8080/api/booking/fetch/customer-wise?customerId=" +
-        user.id
+      user.id
     );
     return response.data;
   };
@@ -139,7 +139,7 @@ const MyBooking = () => {
             height: "50px",
           }}
         >
-          <h2>All Bookings</h2>
+          <h2>Tüm Rezerasyonlar</h2>
         </div>
         <div
           className="card-body"
@@ -151,19 +151,19 @@ const MyBooking = () => {
             <table className="table text-color text-center">
               <thead className="table-bordered border-color bg-color custom-bg-text">
                 <tr>
-                  <th scope="col">Variant</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Booking Id</th>
-                  <th scope="col">Total Day</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Customer</th>
-                  <th scope="col">Booking Time</th>
-                  <th scope="col">From</th>
-                  <th scope="col">To</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Vehicle</th>
-                  <th scope="col">Payment</th>
-                  <th scope="col">Action</th>
+                  <th scope="col">Varyant</th>
+                  <th scope="col">Ad</th>
+                  <th scope="col">Rezervasyon ID</th>
+                  <th scope="col">Toplam Gün</th>
+                  <th scope="col">Fiyat</th>
+                  <th scope="col">Müşteri</th>
+                  <th scope="col">Rezervasyon Zamanı</th>
+                  <th scope="col">Başlangıç</th>
+                  <th scope="col">Bitiş</th>
+                  <th scope="col">Durum</th>
+                  <th scope="col">Araç</th>
+                  <th scope="col">Ödeme</th>
+                  <th scope="col">İşlem</th>
                 </tr>
               </thead>
               <tbody className="header-logo-color">
@@ -225,42 +225,44 @@ const MyBooking = () => {
                         <b>{booking.payment ? "Paid" : "Pending"}</b>
                       </td>
                       <td>
-                        {(() => {
-                          if (booking.status === "Approved") {
-                            return (
-                              <button
-                                onClick={() => payAndConfirm(booking)}
-                                className="btn btn-sm bg-color custom-bg-text"
-                              >
-                                <b>Pay & Confirm</b>
-                              </button>
-                            );
-                          }
-                        })()}
+                        <div className="d-flex flex-column align-items-center gap-2">
+                          {(() => {
+                            if (booking.status === "Approved") {
+                              return (
+                                <button
+                                  onClick={() => payAndConfirm(booking)}
+                                  className="btn btn-sm bg-color custom-bg-text"
+                                >
+                                  <b>Öde & Onayla</b>
+                                </button>
+                              );
+                            }
+                          })()}
 
-                        {(() => {
-                          if (
-                            booking.status !== "Paid & Confirmed" &&
-                            booking.status !== "Cancelled"
-                          ) {
-                            return (
-                              <button
-                                type="button"
-                                onClick={(e) => cancelBooking(e, booking.id)}
-                                className="btn btn-sm bg-color custom-bg-text mt-2"
-                              >
-                                <b>Cancel</b>
-                              </button>
-                            );
-                          }
-                        })()}
+                          {(() => {
+                            if (
+                              booking.status !== "Paid & Confirmed" &&
+                              booking.status !== "Cancelled"
+                            ) {
+                              return (
+                                <button
+                                  type="button"
+                                  onClick={(e) => cancelBooking(e, booking.id)}
+                                  className="btn btn-sm bg-color custom-bg-text"
+                                >
+                                  <b>İptal et</b>
+                                </button>
+                              );
+                            }
+                          })()}
 
-                        <button
-                          onClick={() => viewCustomerBookingDetail(booking)}
-                          className="btn btn-sm bg-color custom-bg-text mt-2"
-                        >
-                          <b>View</b>
-                        </button>
+                          <button
+                            onClick={() => viewCustomerBookingDetail(booking)}
+                            className="btn btn-sm bg-color custom-bg-text"
+                          >
+                            <b>Göster</b>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
