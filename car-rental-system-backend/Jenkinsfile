@@ -1,20 +1,26 @@
 pipeline {
     agent any
 
+    tools {
+        // Manage Jenkins -> Tools kısmında verdiğin ismin aynısı olmalı
+        maven 'Maven 3.9.6' 
+    }
+
     stages {
-        stage('1. Checkout (5 Puan)') {
+        stage('1. Checkout') {
             steps {
-                // Bu aşama otomatik yapılıyor ama loglarda görmek için ekliyoruz
                 echo 'Kodlar GitHubdan cekiliyor...'
                 checkout scm
             }
         }
 
-        stage('2. Build (5 Puan)') {
+        stage('2. Build') {
             steps {
-                echo 'Proje derleniyor (Build)...'
-                // Windows kullanıyorsan 'bat', Linux/Mac ise 'sh' kullanmalısın
-                bat 'mvn clean install -DskipTests' 
+                echo 'Backend projesi derleniyor...'
+                // Dizin backend klasörü olduğu için komutu o klasörde çalıştırmalıyız
+                dir('car-rental-system-backend') {
+                    bat 'mvn clean install -DskipTests'
+                }
             }
         }
     }
