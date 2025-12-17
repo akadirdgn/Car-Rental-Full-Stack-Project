@@ -168,6 +168,12 @@ const MyBooking = () => {
               </thead>
               <tbody className="header-logo-color">
                 {bookings.map((booking) => {
+                  const paidBookings = JSON.parse(localStorage.getItem("fake_paid_bookings") || "[]");
+                  const isFakePaid = paidBookings.includes(booking.bookingId) || paidBookings.includes(booking.id);
+                  // Override status if fake paid
+                  const displayStatus = isFakePaid ? "Paid & Confirmed" : booking.status;
+                  const isPaymentDone = isFakePaid || booking.payment;
+
                   return (
                     <tr>
                       <td>
@@ -212,7 +218,7 @@ const MyBooking = () => {
                         <b>{booking.endDate}</b>
                       </td>
                       <td>
-                        <b>{booking.status}</b>
+                        <b>{displayStatus}</b>
                       </td>
                       <td>
                         <b>
@@ -222,12 +228,12 @@ const MyBooking = () => {
                         </b>
                       </td>
                       <td>
-                        <b>{booking.payment ? "Paid" : "Pending"}</b>
+                        <b>{isPaymentDone ? "Paid" : "Pending"}</b>
                       </td>
                       <td>
                         <div className="d-flex flex-column align-items-center gap-2">
                           {(() => {
-                            if (booking.status === "Approved") {
+                            if (displayStatus === "Approved" && !isFakePaid) {
                               return (
                                 <button
                                   onClick={() => payAndConfirm(booking)}
@@ -241,8 +247,8 @@ const MyBooking = () => {
 
                           {(() => {
                             if (
-                              booking.status !== "Paid & Confirmed" &&
-                              booking.status !== "Cancelled"
+                              displayStatus !== "Paid & Confirmed" &&
+                              displayStatus !== "Cancelled"
                             ) {
                               return (
                                 <button

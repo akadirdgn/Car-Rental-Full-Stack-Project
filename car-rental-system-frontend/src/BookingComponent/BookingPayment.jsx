@@ -50,113 +50,135 @@ const BookingPayment = () => {
       return;
     }
 
-    fetch("http://localhost:8080/api/booking/customer/payment", {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(paymentRequest),
-    })
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.success) {
-            toast.success(res.responseMessage, {
-              position: "top-center",
-              autoClose: 2000,
-            });
+    // --- VALIDATION START ---
 
-            setTimeout(() => {
-              navigate("/customer/bookings");
-            }, 2000);
-          } else {
-            toast.error(res.responseMessage, {
-              position: "top-center",
-              autoClose: 1500,
-            });
-          }
-        })
-        .catch(() => {
-          toast.error("It seems server is down", {
-            position: "top-center",
-            autoClose: 1500,
-          });
-        });
+    // 1. Card Number Validation (16 digits)
+    const cardNoRegex = /^\d{16}$/;
+    if (!cardNoRegex.test(paymentRequest.cardNo.replace(/\s/g, ""))) {
+      toast.error("Geçersiz Kart Numarası! 16 hane olmalıdır.");
+      return;
+    }
+
+    // 2. CVV Validation (3 digits)
+    const cvvRegex = /^\d{3}$/;
+    if (!cvvRegex.test(paymentRequest.cvv)) {
+      toast.error("Geçersiz CVV! 3 hane olmalıdır.");
+      return;
+    }
+
+    // 3. Expiry Date Validation (MM/YY)
+    const expiryRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
+    const expiryMatch = paymentRequest.expiryDate.match(expiryRegex);
+
+    if (!expiryMatch) {
+      toast.error("Geçersiz Son Kullanma Tarihi! Format: AA/YY");
+      return;
+    }
+
+    // Check if expired
+    const currentYear = new Date().getFullYear() % 100; // Last 2 digits
+    const currentMonth = new Date().getMonth() + 1;
+    const inputMonth = parseInt(expiryMatch[1]);
+    const inputYear = parseInt(expiryMatch[2]);
+
+    if (inputYear < currentYear || (inputYear === currentYear && inputMonth < currentMonth)) {
+      toast.error("Kartınızın süresi dolmuş!");
+      return;
+    }
+
+    // --- VALIDATION END ---
+
+    // FAKE PAYMENT SUCCESS
+    toast.success("Ödeme Başarılı (Simülasyon)!", {
+      position: "top-center",
+      autoClose: 2000,
+    });
+
+    // Store fake payment status in localStorage
+    const paidBookings = JSON.parse(localStorage.getItem("fake_paid_bookings") || "[]");
+    if (!paidBookings.includes(paymentRequest.bookingId)) {
+      paidBookings.push(paymentRequest.bookingId);
+      localStorage.setItem("fake_paid_bookings", JSON.stringify(paidBookings));
+    }
+
+    setTimeout(() => {
+      navigate("/customer/bookings");
+    }, 2000);
   };
 
   // 🔴 booking yokken güvenli render
   if (!booking) {
     return (
-        <div className="text-center mt-5">
-          <h4>Ödeme bilgisi bulunamadı</h4>
-        </div>
+      <div className="text-center mt-5">
+        <h4>Ödeme bilgisi bulunamadı</h4>
+      </div>
     );
   }
 
   return (
-      <div className="d-flex justify-content-center mt-4">
-        <div className="card form-card rounded-card custom-bg" style={{ maxWidth: "900px" }}>
-          <div className="card-body header-logo-color">
-            <h4 className="text-center">Payment Details</h4>
+    <div className="d-flex justify-content-center mt-4">
+      <div className="card form-card rounded-card custom-bg" style={{ maxWidth: "900px" }}>
+        <div className="card-body header-logo-color">
+          <h4 className="text-center">Payment Details</h4>
 
-            <div className="row mt-4">
-              <div className="col-sm-4">
-                <img src={creditcard} className="img-fluid" alt="card" />
-              </div>
+          <div className="row mt-4">
+            <div className="col-sm-4">
+              <img src={creditcard} className="img-fluid" alt="card" />
+            </div>
 
-              <div className="col-sm-6">
-                <form className="row g-3" onSubmit={payAndConfirmBooking}>
-                  <input
-                      type="text"
-                      className="form-control"
-                      name="nameOnCard"
-                      placeholder="Name Surname"
-                      onChange={handleUserInput}
-                      value={paymentRequest.nameOnCard}
-                      required
-                  />
+            <div className="col-sm-6">
+              <form className="row g-3" onSubmit={payAndConfirmBooking}>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="nameOnCard"
+                  placeholder="Name Surname"
+                  onChange={handleUserInput}
+                  value={paymentRequest.nameOnCard}
+                  required
+                />
 
-                  <input
-                      type="text"
-                      className="form-control"
-                      name="cardNo"
-                      placeholder="0000 0000 0000 0000"
-                      onChange={handleUserInput}
-                      value={paymentRequest.cardNo}
-                      required
-                  />
+                <input
+                  type="text"
+                  className="form-control"
+                  name="cardNo"
+                  placeholder="0000 0000 0000 0000"
+                  onChange={handleUserInput}
+                  value={paymentRequest.cardNo}
+                  required
+                />
 
-                  <input
-                      type="text"
-                      className="form-control"
-                      name="expiryDate"
-                      placeholder="01/24"
-                      onChange={handleUserInput}
-                      value={paymentRequest.expiryDate}
-                      required
-                  />
+                <input
+                  type="text"
+                  className="form-control"
+                  name="expiryDate"
+                  placeholder="01/24"
+                  onChange={handleUserInput}
+                  value={paymentRequest.expiryDate}
+                  required
+                />
 
-                  <input
-                      type="number"
-                      className="form-control"
-                      name="cvv"
-                      placeholder="123"
-                      onChange={handleUserInput}
-                      value={paymentRequest.cvv}
-                      required
-                  />
+                <input
+                  type="number"
+                  className="form-control"
+                  name="cvv"
+                  placeholder="123"
+                  onChange={handleUserInput}
+                  value={paymentRequest.cvv}
+                  required
+                />
 
-                  <button type="submit" className="btn bg-color custom-bg-text">
-                    PAY {booking.totalPrice}₺
-                  </button>
+                <button type="submit" className="btn bg-color custom-bg-text">
+                  PAY {booking.totalPrice}₺
+                </button>
 
-                  <ToastContainer />
-                </form>
-              </div>
+                <ToastContainer />
+              </form>
             </div>
           </div>
         </div>
       </div>
+    </div>
   );
 };
 

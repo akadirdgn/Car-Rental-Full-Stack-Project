@@ -61,8 +61,19 @@ const ViewVariantDetail = () => {
   };
 
   const bookCar = (e) => {
+    e.preventDefault();
     if (customer === null) {
       alert("Lütfen rezervasyon için giriş yapın!");
+    } else if (booking.startDate >= booking.endDate) {
+      toast.error("Bitiş tarihi başlangıç tarihinden sonra olmalıdır (en az 1 gün)!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else {
       booking.customerId = customer.id;
       booking.vehicleId = variantId;
@@ -118,7 +129,7 @@ const ViewVariantDetail = () => {
         });
     }
 
-    e.preventDefault();
+
   };
 
   return (
@@ -249,7 +260,8 @@ const ViewVariantDetail = () => {
                         id="startDate"
                         name="startDate"
                         onChange={handleBookingInput}
-                        value={booking.checkIn}
+                        value={booking.startDate}
+                        min={new Date().toISOString().split("T")[0]}
                         required
                       />
                     </div>
@@ -263,7 +275,17 @@ const ViewVariantDetail = () => {
                         id="endDate"
                         name="endDate"
                         onChange={handleBookingInput}
-                        value={booking.checkOut}
+                        value={booking.endDate}
+                        min={
+                          booking.startDate
+                            ? new Date(
+                              new Date(booking.startDate).getTime() +
+                              86400000
+                            )
+                              .toISOString()
+                              .split("T")[0]
+                            : ""
+                        }
                         required
                       />
                     </div>

@@ -21,7 +21,7 @@ const AllBookings = () => {
 
   const retrieveAllBookings = async () => {
     const res = await axios.get(
-        "http://localhost:8080/api/booking/fetch/all"
+      "http://localhost:8080/api/booking/fetch/all"
     );
     setBookings(res.data?.bookings || []);
   };
@@ -30,7 +30,7 @@ const AllBookings = () => {
     if (!variantId) return;
 
     const res = await axios.get(
-        `http://localhost:8080/api/vehicle/fetch/variant-wise?variantId=${variantId}`
+      `http://localhost:8080/api/vehicle/fetch/variant-wise?variantId=${variantId}`
     );
     setVehicles(res.data?.vehicles || []);
   };
@@ -76,25 +76,25 @@ const AllBookings = () => {
     }
 
     const payload =
-        status === "Rejected"
-            ? { bookingId: assignBooking.id, status }
-            : { bookingId: assignBooking.id, status, vehicleId };
+      status === "Rejected"
+        ? { bookingId: assignBooking.id, status }
+        : { bookingId: assignBooking.id, status, vehicleId };
 
     fetch("http://localhost:8080/api/booking/update/assign/vehicle", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     })
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.success) {
-            toast.success(res.responseMessage);
-            setTimeout(() => window.location.reload(), 1000);
-          } else {
-            toast.error(res.responseMessage);
-          }
-        })
-        .catch(() => toast.error("Sunucu hatası"));
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          toast.success(res.responseMessage);
+          setTimeout(() => window.location.reload(), 1000);
+        } else {
+          toast.error(res.responseMessage);
+        }
+      })
+      .catch(() => toast.error("Sunucu hatası"));
   };
 
   const viewCustomerBookingDetail = (booking) => {
@@ -102,26 +102,26 @@ const AllBookings = () => {
   };
 
   const formatDateFromEpoch = (epoch) =>
-      new Date(Number(epoch)).toLocaleString();
+    new Date(Number(epoch)).toLocaleString();
 
   /* ---------------- JSX ---------------- */
 
   return (
-      <div className="mt-3">
-        <ToastContainer />
+    <div className="mt-3">
+      <ToastContainer />
 
-        <div
-            className="card form-card ms-2 me-2 mb-5 custom-bg"
-            style={{ height: "45rem" }}
-        >
-          <div className="card-header bg-color custom-bg-text text-center">
-            <h2>Tüm Rezervasyonlar</h2>
-          </div>
+      <div
+        className="card form-card ms-2 me-2 mb-5 custom-bg"
+        style={{ height: "45rem" }}
+      >
+        <div className="card-header bg-color custom-bg-text text-center">
+          <h2>Tüm Rezervasyonlar</h2>
+        </div>
 
-          <div className="card-body" style={{ overflowY: "auto" }}>
-            <div className="table-responsive">
-              <table className="table text-center text-color">
-                <thead className="table-bordered border-color bg-color custom-bg-text">
+        <div className="card-body" style={{ overflowY: "auto" }}>
+          <div className="table-responsive">
+            <table className="table text-center text-color">
+              <thead className="table-bordered border-color bg-color custom-bg-text">
                 <tr>
                   <th>Varyant</th>
                   <th>Ad</th>
@@ -137,17 +137,26 @@ const AllBookings = () => {
                   <th>Ödeme</th>
                   <th>Aksiyon</th>
                 </tr>
-                </thead>
+              </thead>
 
-                <tbody className="header-logo-color">
-                {bookings.map((b) => (
+              <tbody className="header-logo-color">
+                {bookings.map((b) => {
+                  let translatedStatus = b.status;
+                  if (b.status === "Approved") translatedStatus = "Onaylandı";
+                  else if (b.status === "Rejected") translatedStatus = "Reddedildi";
+                  else if (b.status === "Pending") translatedStatus = "Beklemede";
+                  else if (b.status === "Paid & Confirmed") translatedStatus = "Ödendi & Onaylandı";
+                  else if (b.status === "Cancelled") translatedStatus = "İptal Edildi";
+                  else if (b.status === "Cancel") translatedStatus = "İptal Edildi";
+
+                  return (
                     <tr key={b.id}>
                       <td>
                         <img
-                            src={`http://localhost:8080/api/variant/${b.variant?.image}`}
-                            alt="arac"
-                            className="img-fluid"
-                            style={{ maxWidth: "90px" }}
+                          src={`http://localhost:8080/api/variant/${b.variant?.image}`}
+                          alt="arac"
+                          className="img-fluid"
+                          style={{ maxWidth: "90px" }}
                         />
                       </td>
                       <td><b>{b.variant?.name}</b></td>
@@ -160,99 +169,102 @@ const AllBookings = () => {
                       <td><b>{formatDateFromEpoch(b.bookingTime)}</b></td>
                       <td><b>{b.startDate}</b></td>
                       <td><b>{b.endDate}</b></td>
-                      <td><b>{b.status}</b></td>
+                      <td><b>{translatedStatus}</b></td>
                       <td>
                         <b>{b.vehicle?.registrationNumber || "Yok"}</b>
                       </td>
                       <td><b>{b.payment ? "Ödendi" : "Beklemede"}</b></td>
                       <td>
-                        {b.status === "Pending" && (
+                        <div className="d-flex flex-column align-items-center gap-2">
+                          {b.status === "Pending" && (
                             <button
-                                onClick={() => assignBookingVehicle(b)}
-                                className="btn btn-sm bg-color custom-bg-text me-1"
+                              onClick={() => assignBookingVehicle(b)}
+                              className="btn btn-sm bg-color custom-bg-text"
                             >
                               Güncelle
                             </button>
-                        )}
-                        <button
+                          )}
+                          <button
                             onClick={() => viewCustomerBookingDetail(b)}
                             className="btn btn-sm bg-color custom-bg-text"
-                        >
-                          Görüntüle
-                        </button>
+                          >
+                            Görüntüle
+                          </button>
+                        </div>
                       </td>
                     </tr>
-                ))}
-                </tbody>
-              </table>
-            </div>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
-
-        {/* ---------------- MODAL ---------------- */}
-
-        <Modal show={showModal} onHide={() => setShowModal(false)}>
-          <Modal.Header closeButton className="bg-color custom-bg-text">
-            <Modal.Title>Rezervasyon Durumu Güncelle</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            {assignBooking && (
-                <form onSubmit={updateCustomerBookingStatus}>
-                  <div className="mb-3">
-                    <label className="form-label"><b>Rezervasyon ID</b></label>
-                    <input
-                        className="form-control"
-                        value={assignBooking.bookingId}
-                        readOnly
-                    />
-                  </div>
-
-                  <div className="mb-3">
-                    <label className="form-label"><b>Durum</b></label>
-                    <select
-                        className="form-control"
-                        onChange={(e) => setStatus(e.target.value)}
-                    >
-                      <option value="">Durum Seç</option>
-                      <option value="Approved">Onaylandı</option>
-                      <option value="Rejected">Reddedildi</option>
-                    </select>
-                  </div>
-
-                  {status === "Approved" && (
-                      <div className="mb-3">
-                        <label className="form-label"><b>Araç</b></label>
-                        <select
-                            className="form-control"
-                            onChange={(e) => setVehicleId(e.target.value)}
-                        >
-                          <option value="">Araç Seç</option>
-                          {vehicles.map((v) => (
-                              <option key={v.id} value={v.id}>
-                                {v.registrationNumber}
-                              </option>
-                          ))}
-                        </select>
-                      </div>
-                  )}
-
-                  <div className="d-flex justify-content-center">
-                    <button className="btn bg-color custom-bg-text">
-                      Kaydet
-                    </button>
-                  </div>
-                </form>
-            )}
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowModal(false)}>
-              Kapat
-            </Button>
-          </Modal.Footer>
-        </Modal>
       </div>
+
+      {/* ---------------- MODAL ---------------- */}
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton className="bg-color custom-bg-text">
+          <Modal.Title>Rezervasyon Durumu Güncelle</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          {assignBooking && (
+            <form onSubmit={updateCustomerBookingStatus}>
+              <div className="mb-3">
+                <label className="form-label"><b>Rezervasyon ID</b></label>
+                <input
+                  className="form-control"
+                  value={assignBooking.bookingId}
+                  readOnly
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label"><b>Durum</b></label>
+                <select
+                  className="form-control"
+                  onChange={(e) => setStatus(e.target.value)}
+                >
+                  <option value="">Durum Seç</option>
+                  <option value="Approved">Onaylandı</option>
+                  <option value="Rejected">Reddedildi</option>
+                </select>
+              </div>
+
+              {status === "Approved" && (
+                <div className="mb-3">
+                  <label className="form-label"><b>Araç</b></label>
+                  <select
+                    className="form-control"
+                    onChange={(e) => setVehicleId(e.target.value)}
+                  >
+                    <option value="">Araç Seç</option>
+                    {vehicles.map((v) => (
+                      <option key={v.id} value={v.id}>
+                        {v.registrationNumber}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              <div className="d-flex justify-content-center">
+                <button className="btn bg-color custom-bg-text">
+                  Kaydet
+                </button>
+              </div>
+            </form>
+          )}
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Kapat
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 };
 

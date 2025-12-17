@@ -135,6 +135,13 @@ const ViewVariants = () => {
               </thead>
               <tbody className="header-logo-color">
                 {variants.map((variant) => {
+                  let translatedFuel = variant.fuelType;
+                  if (variant.fuelType === "Petrol" || variant.fuelType === "Gasoline") translatedFuel = "Benzin";
+                  else if (variant.fuelType === "Diesel") translatedFuel = "Dizel";
+                  else if (variant.fuelType === "Electric") translatedFuel = "Elektrik";
+                  else if (variant.fuelType === "Hybrid") translatedFuel = "Hibrit";
+                  else if (variant.fuelType === "CNG") translatedFuel = "CNG";
+
                   return (
                     <tr>
                       <td>
@@ -159,7 +166,7 @@ const ViewVariants = () => {
                         <b>{variant.description}</b>
                       </td>
                       <td>
-                        <b>{variant.fuelType}</b>
+                        <b>{translatedFuel}</b>
                       </td>
                       <td>
                         <b>{variant.seatingCapacity}</b>
@@ -171,31 +178,33 @@ const ViewVariants = () => {
                         <b>{variant.year}</b>
                       </td>
                       <td>
-                        <b>{variant.ac === true ? "Yes" : "No"}</b>
+                        <b>{variant.ac === true ? "Evet" : "Hayır"}</b>
                       </td>
                       <td>
                         <b>{variant.pricePerDay}</b>
                       </td>
                       <td>
-                        <button
-                          onClick={() => updateVariant(variant)}
-                          className="btn btn-sm bg-color custom-bg-text"
-                        >
-                          <b> Güncelle</b>
-                        </button>
-                        <button
-                          onClick={() => deleteVariant(variant.id)}
-                          className="btn btn-sm bg-color custom-bg-text mt-2"
-                        >
-                          <b>Sil</b>
-                        </button>
+                        <div className="d-flex flex-column align-items-center gap-2">
+                          <button
+                            onClick={() => updateVariant(variant)}
+                            className="btn btn-sm bg-color custom-bg-text w-100"
+                          >
+                            <b> Güncelle</b>
+                          </button>
+                          <button
+                            onClick={() => deleteVariant(variant.id)}
+                            className="btn btn-sm bg-color custom-bg-text w-100"
+                          >
+                            <b>Sil</b>
+                          </button>
 
-                        <button
-                          onClick={() => viewVehicles(variant)}
-                          className="btn btn-sm bg-color custom-bg-text mt-2"
-                        >
-                          <b>Araçları Göster</b>
-                        </button>
+                          <button
+                            onClick={() => viewVehicles(variant)}
+                            className="btn btn-sm bg-color custom-bg-text w-100"
+                          >
+                            <b>Araçları Göster</b>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );

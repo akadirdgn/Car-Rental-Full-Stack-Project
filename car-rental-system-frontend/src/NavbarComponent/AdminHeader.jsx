@@ -8,8 +8,9 @@ const AdminHeader = () => {
   const user = JSON.parse(sessionStorage.getItem("active-admin"));
   console.log(user);
 
-  const adminLogout = () => {
-    toast.success("logged out!!!", {
+  const adminLogout = (e) => {
+    e.preventDefault();
+    toast.success("Çıkış yapıldı", {
       position: "top-center",
       autoClose: 1000,
       hideProgressBar: false,
@@ -20,10 +21,10 @@ const AdminHeader = () => {
     });
     sessionStorage.removeItem("active-admin");
     sessionStorage.removeItem("admin-jwtToken");
-    window.location.reload(true);
+
     setTimeout(() => {
-      navigate("/home");
-    }, 2000); // Redirect after 3 seconds
+      window.location.href = "/home";
+    }, 1000);
   };
   return (
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
@@ -73,15 +74,7 @@ const AdminHeader = () => {
           <b className="text-color"> Rezervasyonlar</b>
         </Link>
       </li>
-      <li class="nav-item">
-        <Link
-          to="/admin/customer/all"
-          class="nav-link active"
-          aria-current="page"
-        >
-          <b className="text-color"> Kullanıcılar</b>
-        </Link>
-      </li>
+
       <li class="nav-item">
         <Link
           to=""
@@ -91,8 +84,8 @@ const AdminHeader = () => {
         >
           <b className="text-color">Çıkış Yap</b>
         </Link>
-        <ToastContainer />
       </li>
+      <ToastContainer />
     </ul>
   );
 };
