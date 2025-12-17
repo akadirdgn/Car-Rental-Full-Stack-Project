@@ -82,8 +82,5 @@ The application utilizes a relational database structure designed for integrity 
     - Install dependencies: `npm install`
     - Start app: `npm start`
 
----
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
+KADİR

@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('1. Checkout (5 Puan)') {
+            steps {
+                // Bu aşama otomatik yapılıyor ama loglarda görmek için ekliyoruz
+                echo 'Kodlar GitHubdan cekiliyor...'
+                checkout scm
+            }
+        }
+
+        stage('2. Build (5 Puan)') {
+            steps {
+                echo 'Proje derleniyor (Build)...'
+                // Windows kullanıyorsan 'bat', Linux/Mac ise 'sh' kullanmalısın
+                bat 'mvn clean install -DskipTests' 
+            }
+        }
+    }
+}
