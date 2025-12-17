@@ -98,13 +98,13 @@ const AdminRegisterForm = () => {
                 height: "38px",
               }}
             >
-              <h4 className="card-title">Admin Register</h4>
+              <h4 className="card-title">Admin Kaydı</h4>
             </div>
             <div className="card-body mt-3">
               <form>
                 <div className="mb-3 text-color">
                   <label for="emailId" className="form-label">
-                    <b>Email Id</b>
+                    <b>Email</b>
                   </label>
                   <input
                     type="email"
@@ -117,7 +117,7 @@ const AdminRegisterForm = () => {
                 </div>
                 <div className="mb-3 text-color">
                   <label for="password" className="form-label">
-                    <b>Password</b>
+                    <b>Şifre</b>
                   </label>
                   <input
                     type="password"

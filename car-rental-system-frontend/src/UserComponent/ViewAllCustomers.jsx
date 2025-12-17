@@ -59,7 +59,7 @@ const ViewAllCustomers = () => {
             height: "50px",
           }}
         >
-          <h2>All Customers</h2>
+          <h2>Tüm Kullanıcılar</h2>
         </div>
         <div
           className="card-body"
@@ -71,12 +71,12 @@ const ViewAllCustomers = () => {
             <table className="table table-hover text-color text-center">
               <thead className="table-bordered border-color bg-color custom-bg-text">
                 <tr>
-                  <th scope="col">First Name</th>
-                  <th scope="col">Last Name</th>
-                  <th scope="col">Email Id</th>
-                  <th scope="col">Phone No</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">Driving License</th>
+                  <th scope="col">Ad</th>
+                  <th scope="col">Soyad</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Telefon Numarası</th>
+                  <th scope="col">Adres</th>
+                  <th scope="col">Sürücü Belgesi</th>
                 </tr>
               </thead>
               <tbody>
@@ -109,7 +109,7 @@ const ViewAllCustomers = () => {
                           onClick={() => viewProfile(employer)}
                           className="btn btn-sm bg-color custom-bg-text"
                         >
-                          <b>View</b>
+                          <b>Göster</b>
                         </button>
                       </td>
                     </tr>

@@ -47,35 +47,35 @@ const UserProfile = () => {
         >
           <div className="card-body header-logo-color">
             <h4 className="card-title text-color  text-center">
-              Personal Detail
+              Kışisel Bilgiler
             </h4>
 
             <div className="row mt-4">
               <div className="col-md-4">
                 <p className="mb-2">
-                  <b className="text-color">First Name:</b> {user.firstName}
+                  <b className="text-color">Ad:</b> {user.firstName}
                 </p>
               </div>
               <div className="col-md-4">
                 <p className="mb-2">
-                  <b className="text-color">Last Name:</b> {user.lastName}
+                  <b className="text-color">Soyad:</b> {user.lastName}
                 </p>
               </div>
               <div className="col-md-4">
                 <p className="mb-2">
-                  <b className="text-color">Email Id:</b> {user.emailId}
+                  <b className="text-color">Email:</b> {user.emailId}
                 </p>
               </div>
             </div>
             <div className="row mt-2">
               <div className="col-md-4">
                 <p className="mb-2">
-                  <b className="text-color">Contact:</b> {user.phoneNo}
+                  <b className="text-color">Telefon Numarası:</b> {user.phoneNo}
                 </p>
               </div>
               <div className="col-md-4">
                 <p className="mb-2">
-                  <b className="text-color">Address:</b>{" "}
+                  <b className="text-color">Adres:</b>{" "}
                   {user.address.street +
                     " " +
                     user.address.city +
@@ -85,7 +85,7 @@ const UserProfile = () => {
               </div>
             </div>
             <h4 className="card-title text-color  text-center mt-5">
-              Driving License
+              Sürücü Belgesi
             </h4>
             {(() => {
               if (user.license) {
@@ -94,13 +94,13 @@ const UserProfile = () => {
                     <div className="row mt-4">
                       <div className="col-md-4">
                         <p className="mb-2">
-                          <b className="text-color">License No:</b>{" "}
+                          <b className="text-color">Sürücü Belgesi Numarası:</b>{" "}
                           {user.license.licenseNumber}
                         </p>
                       </div>
                       <div className="col-md-4">
                         <p className="mb-2">
-                          <b className="text-color">License Expiry:</b>{" "}
+                          <b className="text-color">Son Kullanım Tarihi:</b>{" "}
                           {user.license.expirationDate}
                         </p>
                       </div>
@@ -132,14 +132,14 @@ const UserProfile = () => {
                       onClick={(e) => addDrivingLicense()}
                       className="btn btn-md bg-color custom-bg-text mt-4 "
                     >
-                      <b>Add License</b>
+                      <b>Sürücü Belgesi Ekle</b>
                     </button>
                   </div>
                 );
               } else {
                 return (
                   <div className="text-center header-logo-color mt-4">
-                    <h5>Not Uploaded</h5>
+                    <h5>Yüklenmedi</h5>
                   </div>
                 );
               }

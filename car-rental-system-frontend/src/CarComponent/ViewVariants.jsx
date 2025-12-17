@@ -108,7 +108,7 @@ const ViewVariants = () => {
             height: "50px",
           }}
         >
-          <h2>All Variants</h2>
+          <h2>Tüm Varyantlar</h2>
         </div>
         <div
           className="card-body"
@@ -120,17 +120,17 @@ const ViewVariants = () => {
             <table className="table text-color text-center">
               <thead className="table-bordered border-color bg-color custom-bg-text">
                 <tr>
-                  <th scope="col">Variant</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Company</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Fuel Type</th>
-                  <th scope="col">Seat Capacity</th>
+                  <th scope="col">Varyant</th>
+                  <th scope="col">Ad</th>
+                  <th scope="col">Firma</th>
+                  <th scope="col">Açıklama</th>
+                  <th scope="col">Yakıt Türü</th>
+                  <th scope="col">Koltuk Kapasitesi</th>
                   <th scope="col">Model</th>
-                  <th scope="col">Year</th>
-                  <th scope="col">Is AC</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Action</th>
+                  <th scope="col">Yıl</th>
+                  <th scope="col">Klima</th>
+                  <th scope="col">Fiyat</th>
+                  <th scope="col">İşlem</th>
                 </tr>
               </thead>
               <tbody className="header-logo-color">
@@ -181,20 +181,20 @@ const ViewVariants = () => {
                           onClick={() => updateVariant(variant)}
                           className="btn btn-sm bg-color custom-bg-text"
                         >
-                          <b> Update</b>
+                          <b> Güncelle</b>
                         </button>
                         <button
                           onClick={() => deleteVariant(variant.id)}
                           className="btn btn-sm bg-color custom-bg-text mt-2"
                         >
-                          <b>Delete</b>
+                          <b>Sil</b>
                         </button>
 
                         <button
                           onClick={() => viewVehicles(variant)}
                           className="btn btn-sm bg-color custom-bg-text mt-2"
                         >
-                          <b>View Vehicles</b>
+                          <b>Araçları Göster</b>
                         </button>
                       </td>
                     </tr>

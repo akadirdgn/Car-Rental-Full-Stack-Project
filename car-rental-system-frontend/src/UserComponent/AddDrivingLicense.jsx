@@ -122,13 +122,13 @@ const AddDrivingLicense = () => {
                 height: "45px",
               }}
             >
-              <h5 class="card-title">Add Driving License</h5>
+              <h5 class="card-title">Sürücü Belgesi Ekle</h5>
             </div>
             <div class="card-body text-color">
               <form className="row g-3">
                 <div className="col-md-6 mb-3">
                   <label htmlFor="title" className="form-label">
-                    <b>License Number</b>
+                    <b>Sürücü Belgesi Numarası</b>
                   </label>
                   <input
                     type="text"
@@ -141,7 +141,7 @@ const AddDrivingLicense = () => {
                 </div>
                 <div className="col-md-6 mb-3">
                   <label htmlFor="title" className="form-label">
-                    <b>Expiry Date</b>
+                    <b>Son Kullanma Tarihi</b>
                   </label>
                   <input
                     type="date"
@@ -155,7 +155,7 @@ const AddDrivingLicense = () => {
 
                 <div className="col-md-6 mb-3">
                   <label for="formFile" class="form-label">
-                    <b> Select License Pic</b>
+                    <b> Sürücü Belgesini Yükleyin</b>
                   </label>
                   <input
                     class="form-control"
@@ -173,7 +173,7 @@ const AddDrivingLicense = () => {
                     class="btn bg-color custom-bg-text"
                     onClick={saveLicense}
                   >
-                    <b> Add License</b>
+                    <b> Sürücü Belgesi Ekle</b>
                   </button>
                 </div>
               </form>

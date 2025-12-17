@@ -9,11 +9,11 @@ const Footer = () => {
               <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
                   <h4 class="text-uppercase text-color">
-                    <i>Car Rental System</i>
+                    <i>ARAÇ KİRALAMA SİSTEMİ</i>
                   </h4>
 
                   <p className="header-logo-color">
-                    Kadir, Nurullah ve Yusuf olarak birlikte yola çıktık ve hayalimizdeki Rent A Car sitesini gerçeğe dönüştürdük. Kolay, güvenilir ve kullanıcı dostu bir araç kiralama deneyimi sunmak için buradayız. Keşfetmenin keyfini çıkarın, yolculuğun tadını çıkarın. Hoş geldiniz!
+                    Merhaba, ben Abdulkadir. Hayalini kurduğumuz Rent A Car platformunu gerçeğe dönüştürerek sizlere kolay, güvenilir ve kullanıcı dostu bir araç kiralama deneyimi sunmayı amaçladık. Keşfetmenin keyfini çıkarın, yolculuğunuza güvenle başlayın. Hoş geldiniz!
                   </p>
                 </div>
 
@@ -25,14 +25,14 @@ const Footer = () => {
             <section class="">
               <p class="d-flex justify-content-center align-items-center">
                 <span class="me-3 custom-bg-text">
-                  <b>Login from here</b>
+                  <b>Buradan Giriş Yapın</b>
                 </span>
                 <Link to="/user/login" class="active">
                   <button
                     type="button"
                     class="btn btn-outline-light btn-rounded bg-color custom-bg-text"
                   >
-                    <b> Log in</b>
+                    <b> Giriş Yap</b>
                   </button>
                 </Link>
               </p>

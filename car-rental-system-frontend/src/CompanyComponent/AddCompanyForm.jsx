@@ -81,13 +81,13 @@ const AddCompanyForm = () => {
                 height: "38px",
               }}
             >
-              <h4 className="card-title">Add Company</h4>
+              <h4 className="card-title">Şirket Ekle</h4>
             </div>
             <div className="card-body mt-3">
               <form className="text-color">
                 <div className="mb-3">
                   <label for="name" class="form-label">
-                    <b>Name</b>
+                    <b>İsim</b>
                   </label>
                   <input
                     type="text"
@@ -100,7 +100,7 @@ const AddCompanyForm = () => {
                 </div>
                 <div className="mb-3">
                   <label for="description" class="form-label">
-                    <b>Description</b>
+                    <b>Açıklama</b>
                   </label>
                   <textarea
                     type="text"
@@ -117,7 +117,7 @@ const AddCompanyForm = () => {
                     className="btn bg-color custom-bg-text"
                     onClick={addCompany}
                   >
-                    <b> Add Company</b>
+                    <b> Şirket Ekle</b>
                   </button>
                   <ToastContainer />
                 </div>

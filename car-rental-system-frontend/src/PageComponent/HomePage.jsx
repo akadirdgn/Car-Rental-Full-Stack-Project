@@ -77,7 +77,7 @@ const HomePage = () => {
     >
       <Carousel />
 
-      <h4 className="text-color text-center mt-3">Search Cars here..!!</h4>
+      <h4 className="text-color text-center mt-3">Hemen Araç Araması Yapın</h4>
       <div className="d-flex aligns-items-center justify-content-center mt-3">
         <form class="row g-3">
           <div class="col-auto">
@@ -86,7 +86,7 @@ const HomePage = () => {
               className="form-control"
               required
             >
-              <option value="">Select Car Company..</option>
+              <option value="">Araç Firmasını Seçin...</option>
 
               {companies.map((company) => {
                 return <option value={company.id}> {company.name} </option>;
@@ -100,7 +100,7 @@ const HomePage = () => {
               class="btn bg-color custom-bg-text mb-3"
               onClick={searchCompany}
             >
-              <b>Search</b>
+              <b>Ara</b>
             </button>
           </div>
         </form>

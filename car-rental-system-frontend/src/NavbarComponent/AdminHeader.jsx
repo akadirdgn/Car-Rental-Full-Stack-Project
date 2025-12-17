@@ -33,7 +33,7 @@ const AdminHeader = () => {
           class="nav-link active"
           aria-current="page"
         >
-          <b className="text-color">Register Admin</b>
+          <b className="text-color">Admin Kaydı</b>
         </Link>
       </li>
       <li class="nav-item">
@@ -42,7 +42,7 @@ const AdminHeader = () => {
           class="nav-link active"
           aria-current="page"
         >
-          <b className="text-color">Add Company</b>
+          <b className="text-color">Şirket Ekle</b>
         </Link>
       </li>
       <li class="nav-item">
@@ -51,7 +51,7 @@ const AdminHeader = () => {
           class="nav-link active"
           aria-current="page"
         >
-          <b className="text-color">Add Variant</b>
+          <b className="text-color">Varyant Ekle</b>
         </Link>
       </li>
       <li class="nav-item">
@@ -60,7 +60,7 @@ const AdminHeader = () => {
           class="nav-link active"
           aria-current="page"
         >
-          <b className="text-color"> Variants</b>
+          <b className="text-color"> Varyantlar</b>
         </Link>
       </li>
 
@@ -70,7 +70,7 @@ const AdminHeader = () => {
           class="nav-link active"
           aria-current="page"
         >
-          <b className="text-color"> Bookings</b>
+          <b className="text-color"> Rezervasyonlar</b>
         </Link>
       </li>
       <li class="nav-item">
@@ -79,7 +79,7 @@ const AdminHeader = () => {
           class="nav-link active"
           aria-current="page"
         >
-          <b className="text-color"> Customers</b>
+          <b className="text-color"> Kullanıcılar</b>
         </Link>
       </li>
       <li class="nav-item">
@@ -89,7 +89,7 @@ const AdminHeader = () => {
           aria-current="page"
           onClick={adminLogout}
         >
-          <b className="text-color">Logout</b>
+          <b className="text-color">Çıkış Yap</b>
         </Link>
         <ToastContainer />
       </li>

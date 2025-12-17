@@ -62,7 +62,7 @@ const ViewVariantDetail = () => {
 
   const bookCar = (e) => {
     if (customer === null) {
-      alert("Please Login to Book Your Car!!!");
+      alert("Lütfen rezervasyon için giriş yapın!");
     } else {
       booking.customerId = customer.id;
       booking.vehicleId = variantId;
@@ -212,7 +212,7 @@ const ViewVariantDetail = () => {
                       alt=""
                     />
                     <span className="text-color ms-2">
-                      {variant.ac === true ? "Yes" : "No"}
+                      {variant.ac === true ? "Evet" : "Hayır"}
                     </span>
                   </div>
                 </h4>
@@ -241,7 +241,7 @@ const ViewVariantDetail = () => {
                   <form class="row g-3" onSubmit={bookCar}>
                     <div class="col-auto">
                       <label for="from" className="text-color">
-                        <h5>From</h5>
+                        <h5>Başlangıç</h5>
                       </label>
                       <input
                         type="date"
@@ -255,7 +255,7 @@ const ViewVariantDetail = () => {
                     </div>
                     <div class="col-auto">
                       <label for="checkout" className="text-color">
-                        <h5>To</h5>
+                        <h5>Bitiş</h5>
                       </label>
                       <input
                         type="date"
@@ -272,7 +272,7 @@ const ViewVariantDetail = () => {
                       <input
                         type="submit"
                         class="btn custom-bg bg-color mb-3"
-                        value="Book Car"
+                        value="Araç Kirala"
                       />
                       <ToastContainer />
                     </div>

@@ -10,12 +10,12 @@ const NormalHeader = () => {
           class="nav-link active"
           aria-current="page"
         >
-          <b className="text-color">Register</b>
+          <b className="text-color">Kayıt Ol</b>
         </Link>
       </li>
       <li class="nav-item">
         <Link to="/user/login" class="nav-link active" aria-current="page">
-          <b className="text-color">Login User</b>
+          <b className="text-color">Giriş Yap</b>
         </Link>
       </li>
     </ul>

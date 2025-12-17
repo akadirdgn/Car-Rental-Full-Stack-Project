@@ -111,28 +111,28 @@ const UserLoginForm = () => {
                 height: "38px",
               }}
             >
-              <h4 className="card-title">User Login</h4>
+              <h4 className="card-title">Giriş Yap</h4>
             </div>
             <div className="card-body mt-3">
               <form className="text-color">
                 <div class="mb-3">
                   <label for="role" class="form-label">
-                    <b>User Role</b>
+                    <b>Kullanıcı Seçin</b>
                   </label>
                   <select
                     onChange={handleUserInput}
                     className="form-control"
                     name="role"
                   >
-                    <option value="0">Select Role</option>
+                    <option value="0">Kullanıcı</option>
                     <option value="Admin"> Admin </option>
-                    <option value="Customer"> Customer </option>
+                    <option value="Customer"> Müşteri </option>
                   </select>
                 </div>
 
                 <div className="mb-3">
                   <label for="emailId" class="form-label">
-                    <b>Email Id</b>
+                    <b>Email</b>
                   </label>
                   <input
                     type="email"
@@ -145,7 +145,7 @@ const UserLoginForm = () => {
                 </div>
                 <div className="mb-3">
                   <label for="password" className="form-label">
-                    <b>Password</b>
+                    <b>Şifre</b>
                   </label>
                   <input
                     type="password"
@@ -163,7 +163,7 @@ const UserLoginForm = () => {
                     className="btn bg-color custom-bg-text"
                     onClick={loginAction}
                   >
-                    <b> Login</b>
+                    <b> Giriş</b>
                   </button>
                   <ToastContainer />
                 </div>

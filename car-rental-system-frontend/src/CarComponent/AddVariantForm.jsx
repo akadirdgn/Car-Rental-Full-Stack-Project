@@ -168,13 +168,13 @@ const AddVariantForm = () => {
                 height: "45px",
               }}
             >
-              <h5 class="card-title">Add Variant</h5>
+              <h5 class="card-title">Varyant Ekle</h5>
             </div>
             <div class="card-body text-color">
               <form className="row g-3">
                 <div className="col-md-6 mb-3">
                   <label htmlFor="title" className="form-label">
-                    <b>Variant Name</b>
+                    <b>Varyant Adı</b>
                   </label>
                   <input
                     type="text"
@@ -188,7 +188,7 @@ const AddVariantForm = () => {
 
                 <div className="col-md-6 mb-3">
                   <label htmlFor="description" className="form-label">
-                    <b>Variant Description</b>
+                    <b>Varyant Açıklaması</b>
                   </label>
                   <textarea
                     type="text"
@@ -202,7 +202,7 @@ const AddVariantForm = () => {
 
                 <div className="col-md-6 mb-3">
                   <label className="form-label">
-                    <b>Company</b>
+                    <b>Şirket</b>
                   </label>
 
                   <select
@@ -210,7 +210,7 @@ const AddVariantForm = () => {
                     onChange={handleInput}
                     className="form-control"
                   >
-                    <option value="">Select Company</option>
+                    <option value="">Şirket Seçin</option>
 
                     {companies.map((company) => {
                       return (
@@ -222,7 +222,7 @@ const AddVariantForm = () => {
 
                 <div className="col-md-6 mb-3">
                   <label className="form-label">
-                    <b>Model Number</b>
+                    <b>Model Numarası</b>
                   </label>
                   <input
                     type="text"
@@ -235,7 +235,7 @@ const AddVariantForm = () => {
 
                 <div className="col-md-6 mb-3">
                   <label htmlFor="title" className="form-label">
-                    <b>Year</b>
+                    <b>Yıl</b>
                   </label>
                   <input
                     type="text"
@@ -249,7 +249,7 @@ const AddVariantForm = () => {
 
                 <div className="col-md-6 mb-3">
                   <label className="form-label">
-                    <b>Fuel Type</b>
+                    <b>Yakıt Tipi</b>
                   </label>
 
                   <select
@@ -267,7 +267,7 @@ const AddVariantForm = () => {
 
                 <div className="col-md-6 mb-3">
                   <label className="form-label">
-                    <b>Is AC</b>
+                    <b>Klima</b>
                   </label>
 
                   <select
@@ -275,15 +275,15 @@ const AddVariantForm = () => {
                     onChange={handleInput}
                     className="form-control"
                   >
-                    <option value="">Select Is AC</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
+                    <option value="">Klima Var Mı?</option>
+                    <option value="true">Evet</option>
+                    <option value="false">Hayır</option>
                   </select>
                 </div>
 
                 <div className="col-md-6 mb-3">
                   <label htmlFor="title" className="form-label">
-                    <b>Seat Capacity</b>
+                    <b>Koltuk Kapasitesi</b>
                   </label>
                   <input
                     type="number"
@@ -297,7 +297,7 @@ const AddVariantForm = () => {
 
                 <div className="col-md-6 mb-3">
                   <label htmlFor="title" className="form-label">
-                    <b>Rent Per Day</b>
+                    <b>Günlük Ücret</b>
                   </label>
                   <input
                     type="number"
@@ -311,7 +311,7 @@ const AddVariantForm = () => {
 
                 <div className="col-md-6 mb-3">
                   <label for="formFile" class="form-label">
-                    <b> Select Variant Image</b>
+                    <b> Varyant Resmi Ekle</b>
                   </label>
                   <input
                     class="form-control"
@@ -329,7 +329,7 @@ const AddVariantForm = () => {
                     class="btn bg-color custom-bg-text"
                     onClick={saveVariant}
                   >
-                    <b> Add Variant</b>
+                    <b> Varyant Ekle</b>
                   </button>
                 </div>
               </form>

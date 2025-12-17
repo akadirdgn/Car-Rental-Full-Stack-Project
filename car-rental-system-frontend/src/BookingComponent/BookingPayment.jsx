@@ -1,25 +1,39 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
 import creditcard from "../images/credit-card.png";
 import { ToastContainer, toast } from "react-toastify";
 
 const BookingPayment = () => {
   const location = useLocation();
-  var booking = location.state;
+  const navigate = useNavigate();
 
-  const sessionCustomer = JSON.parse(sessionStorage.getItem("active-customer"));
+  const booking = location.state;
 
-  let navigate = useNavigate();
-
+  // ✅ Hook HER ZAMAN en üstte
   const [paymentRequest, setPaymentRequest] = useState({
-    bookingId: booking.id,
+    bookingId: null,
     nameOnCard: "",
     cardNo: "",
     cvv: "",
     expiryDate: "",
   });
+
+  // 🔴 booking yoksa geri dön
+  useEffect(() => {
+    if (!booking) {
+      navigate("/customer/bookings");
+    }
+  }, [booking, navigate]);
+
+  // ✅ booking GELDİKTEN SONRA bookingId set et
+  useEffect(() => {
+    if (booking) {
+      setPaymentRequest((prev) => ({
+        ...prev,
+        bookingId: booking.bookingId ?? booking.id,
+      }));
+    }
+  }, [booking]);
 
   const handleUserInput = (e) => {
     setPaymentRequest({
@@ -29,6 +43,13 @@ const BookingPayment = () => {
   };
 
   const payAndConfirmBooking = (e) => {
+    e.preventDefault();
+
+    if (!paymentRequest.bookingId) {
+      toast.error("Booking bilgisi eksik");
+      return;
+    }
+
     fetch("http://localhost:8080/api/booking/customer/payment", {
       method: "PUT",
       headers: {
@@ -37,146 +58,98 @@ const BookingPayment = () => {
       },
       body: JSON.stringify(paymentRequest),
     })
-      .then((result) => {
-        result.json().then((res) => {
+        .then((res) => res.json())
+        .then((res) => {
           if (res.success) {
             toast.success(res.responseMessage, {
               position: "top-center",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
+              autoClose: 2000,
             });
 
             setTimeout(() => {
               navigate("/customer/bookings");
-            }, 2000); // Redirect after 3 seconds
+            }, 2000);
           } else {
             toast.error(res.responseMessage, {
               position: "top-center",
-              autoClose: 1000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
+              autoClose: 1500,
             });
           }
+        })
+        .catch(() => {
+          toast.error("It seems server is down", {
+            position: "top-center",
+            autoClose: 1500,
+          });
         });
-      })
-      .catch((error) => {
-        console.error(error);
-        toast.error("It seems server is down", {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      });
-    e.preventDefault();
   };
 
+  // 🔴 booking yokken güvenli render
+  if (!booking) {
+    return (
+        <div className="text-center mt-5">
+          <h4>Ödeme bilgisi bulunamadı</h4>
+        </div>
+    );
+  }
+
   return (
-    <div>
-      <div className="d-flex align-items-center justify-content-center ms-5 mt-1 me-5 mb-3">
-        <div
-          className="card form-card rounded-card h-100 custom-bg"
-          style={{
-            maxWidth: "900px",
-          }}
-        >
+      <div className="d-flex justify-content-center mt-4">
+        <div className="card form-card rounded-card custom-bg" style={{ maxWidth: "900px" }}>
           <div className="card-body header-logo-color">
-            <h4 className="card-title text-color  text-center">
-              Payment Details
-            </h4>
+            <h4 className="text-center">Payment Details</h4>
 
             <div className="row mt-4">
-              <div class="col-sm-1 mt-2"></div>
-              <div class="col-sm-4 mt-2">
-                <img
-                  src={creditcard}
-                  className="card-img-top rounded img-fluid"
-                  alt="img"
-                  style={{
-                    maxWidth: "500px",
-                  }}
-                />
+              <div className="col-sm-4">
+                <img src={creditcard} className="img-fluid" alt="card" />
               </div>
-              <div class="col-sm-4 mt-2">
+
+              <div className="col-sm-6">
                 <form className="row g-3" onSubmit={payAndConfirmBooking}>
-                  <div className=" text-color">
-                    <label htmlFor="title" className="form-label">
-                      <b>Name on Card</b>
-                    </label>
-                    <input
+                  <input
                       type="text"
                       className="form-control"
-                      id="nameOnCard"
                       name="nameOnCard"
+                      placeholder="Name Surname"
                       onChange={handleUserInput}
                       value={paymentRequest.nameOnCard}
-                      placeholder="Name Surname"
                       required
-                    />
-                  </div>
-                  <div className="mb-3 text-color">
-                    <label htmlFor="title" className="form-label">
-                      <b>Card Number</b>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="cardNo"
-                      name="cardNo"
-                      onChange={handleUserInput}
-                      value={paymentRequest.cardNo}
-                      placeholder="0000 0000 0000 0000"
-                      required
-                    />
-                  </div>
-
-                  <div className="col text-color">
-                    <label htmlFor="title" className="form-label">
-                      <b>Valid Through</b>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="expiryDate"
-                      name="expiryDate"
-                      onChange={handleUserInput}
-                      value={paymentRequest.expiryDate}
-                      placeholder="01/24"
-                      required
-                    />
-                  </div>
-
-                  <div className="col text-color">
-                    <label htmlFor="title" className="form-label">
-                      <b>CVV</b>
-                    </label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="cvv"
-                      name="cvv"
-                      onChange={handleUserInput}
-                      value={paymentRequest.cvv}
-                      placeholder="123"
-                      required
-                    />
-                  </div>
+                  />
 
                   <input
-                    type="submit"
-                    className="btn bg-color custom-bg-text ms-2 "
-                    value={`PAY  ${booking.totalPrice}₺`}
+                      type="text"
+                      className="form-control"
+                      name="cardNo"
+                      placeholder="0000 0000 0000 0000"
+                      onChange={handleUserInput}
+                      value={paymentRequest.cardNo}
+                      required
                   />
+
+                  <input
+                      type="text"
+                      className="form-control"
+                      name="expiryDate"
+                      placeholder="01/24"
+                      onChange={handleUserInput}
+                      value={paymentRequest.expiryDate}
+                      required
+                  />
+
+                  <input
+                      type="number"
+                      className="form-control"
+                      name="cvv"
+                      placeholder="123"
+                      onChange={handleUserInput}
+                      value={paymentRequest.cvv}
+                      required
+                  />
+
+                  <button type="submit" className="btn bg-color custom-bg-text">
+                    PAY {booking.totalPrice}₺
+                  </button>
+
                   <ToastContainer />
                 </form>
               </div>
@@ -184,7 +157,6 @@ const BookingPayment = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

@@ -301,8 +301,8 @@ const UpdateVariantForm = () => {
                     className="form-control"
                   >
                     <option value="">Select Is AC</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
+                    <option value="true">Evet</option>
+                    <option value="false">Hayır</option>
                   </select>
                 </div>
 

@@ -16,7 +16,7 @@ const Header = () => {
           />
           <Link to="/" class="navbar-brand">
             <i>
-              <b className="header-logo-color ms-2">Car Rental System</b>
+              <b className="header-logo-color ms-2">Araç Kiralama Sistemi</b>
             </i>
           </Link>
 

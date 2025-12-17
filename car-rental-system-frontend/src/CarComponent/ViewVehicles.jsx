@@ -232,13 +232,13 @@ const ViewVehicles = () => {
                   height: "38px",
                 }}
               >
-                <h4 className="card-title">Add Vehicle</h4>
+                <h4 className="card-title">Araba Ekle</h4>
               </div>
               <div className="card-body mt-3">
                 <form className="text-color">
                   <div className="mb-3">
                     <label for="name" class="form-label">
-                      <b>Registration Number</b>
+                      <b>Araç Plakası</b>
                     </label>
                     <input
                       type="text"
@@ -257,7 +257,7 @@ const ViewVehicles = () => {
                       className="btn bg-color custom-bg-text"
                       onClick={saveVehicle}
                     >
-                      <b> Add Vehicle</b>
+                      <b> Araba Ekle</b>
                     </button>
                     <ToastContainer />
                   </div>
@@ -281,7 +281,7 @@ const ViewVehicles = () => {
             height: "50px",
           }}
         >
-          <h2>All Variants</h2>
+          <h2>Tüm Varyantlar</h2>
         </div>
         <div
           className="card-body"
@@ -293,10 +293,10 @@ const ViewVehicles = () => {
             <table className="table table-hover text-color text-center">
               <thead className="table-bordered border-color bg-color custom-bg-text">
                 <tr>
-                  <th scope="col">Vehicle Id</th>
-                  <th scope="col">Vehicle Registration No.</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Action</th>
+                  <th scope="col">Araç ID</th>
+                  <th scope="col">Plaka Numarası</th>
+                  <th scope="col">Durum</th>
+                  <th scope="col">İşlem</th>
                 </tr>
               </thead>
               <tbody className="header-logo-color">
@@ -318,7 +318,7 @@ const ViewVehicles = () => {
                           onClick={() => deleteVehicle(vehicle.id)}
                           className="btn btn-sm bg-color custom-bg-text"
                         >
-                          <b>Delete</b>
+                          <b>Sil</b>
                         </button>
                       </td>
                     </tr>

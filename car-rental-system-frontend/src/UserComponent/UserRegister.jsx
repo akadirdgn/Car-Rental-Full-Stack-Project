@@ -123,13 +123,13 @@ const UserRegister = () => {
                 height: "45px",
               }}
             >
-              <h5 className="card-title">Register Here!!!</h5>
+              <h5 className="card-title">Kayıt Olun</h5>
             </div>
             <div className="card-body mt-3">
               <form className="row g-3" onSubmit={saveUser}>
                 <div className="col-md-6 mb-3 text-color">
                   <label htmlFor="title" className="form-label">
-                    <b>First Name</b>
+                    <b>İsim</b>
                   </label>
                   <input
                     type="text"
@@ -143,7 +143,7 @@ const UserRegister = () => {
 
                 <div className="col-md-6 mb-3 text-color">
                   <label htmlFor="title" className="form-label">
-                    <b>Last Name</b>
+                    <b>Soyisim</b>
                   </label>
                   <input
                     type="text"
@@ -157,7 +157,7 @@ const UserRegister = () => {
 
                 <div className="col-md-6 mb-3 text-color">
                   <b>
-                    <label className="form-label">Email Id</label>
+                    <label className="form-label">Email</label>
                   </b>
                   <input
                     type="email"
@@ -170,7 +170,7 @@ const UserRegister = () => {
                 </div>
                 <div className="col-md-6 mb-3">
                   <label htmlFor="quantity" className="form-label">
-                    <b>Password</b>
+                    <b>Şifre</b>
                   </label>
                   <input
                     type="password"
@@ -184,7 +184,7 @@ const UserRegister = () => {
 
                 <div className="col-md-6 mb-3">
                   <label htmlFor="contact" className="form-label">
-                    <b>Contact No</b>
+                    <b>Telefon Numarası</b>
                   </label>
                   <input
                     type="number"
@@ -198,7 +198,7 @@ const UserRegister = () => {
 
                 <div className="col-md-6 mb-3">
                   <label htmlFor="description" className="form-label">
-                    <b> Street</b>
+                    <b>Adres</b>
                   </label>
                   <textarea
                     className="form-control"
@@ -211,7 +211,7 @@ const UserRegister = () => {
                 </div>
                 <div className="col-md-6 mb-3">
                   <label htmlFor="price" className="form-label">
-                    <b>City</b>
+                    <b>Şehir</b>
                   </label>
                   <input
                     type="text"
@@ -225,7 +225,7 @@ const UserRegister = () => {
 
                 <div className="col-md-6 mb-3">
                   <label htmlFor="pincode" className="form-label">
-                    <b>Pincode</b>
+                    <b>Posta Kodu</b>
                   </label>
                   <input
                     type="number"
@@ -241,7 +241,7 @@ const UserRegister = () => {
                   <input
                     type="submit"
                     className="btn bg-color custom-bg-text"
-                    value="Register User"
+                    value="Kayıt ol"
                   />
                 </div>
                 <ToastContainer />

@@ -3,26 +3,27 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const HeaderCustomer = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const user = JSON.parse(sessionStorage.getItem("active-customer"));
 
-  const userLogout = () => {
-    toast.success("logged out!!!", {
+  const userLogout = (e) => {
+    e.preventDefault(); // 🔴 Link default davranışını durdur
+
+    toast.success("Çıkış yapıldı", {
       position: "top-center",
       autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
     });
+
+    // 🔴 TÜM CUSTOMER OTURUMUNU TEMİZLE
     sessionStorage.removeItem("active-customer");
     sessionStorage.removeItem("customer-jwtToken");
-    window.location.reload(true);
+
+    // 🔴 KISA BEKLE → SONRA YÖNLENDİR
     setTimeout(() => {
-      navigate("/home");
-    }, 2000); // Redirect after 3 seconds
+      navigate("/", { replace: true });
+      window.location.reload(); // 🔴 GARANTİ
+    }, 1000);
   };
 
   const viewProfile = () => {
@@ -30,38 +31,38 @@ const HeaderCustomer = () => {
   };
 
   return (
-    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-      <li class="nav-item">
-        <Link
-          to="/customer/bookings"
-          class="nav-link active"
-          aria-current="page"
-        >
-          <b className="text-color">My Bookings</b>
-        </Link>
-      </li>
+      <ul className="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
+        <li className="nav-item">
+          <Link
+              to="/customer/bookings"
+              className="nav-link active"
+          >
+            <b className="text-color">Rezervasyonlarım</b>
+          </Link>
+        </li>
 
-      <li class="nav-item">
-        <div class="nav-link active" aria-current="page">
-          <b className="text-color" onClick={viewProfile}>
-            My Profile
-          </b>
-          <ToastContainer />
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <Link
-          to=""
-          class="nav-link active"
-          aria-current="page"
-          onClick={userLogout}
+        <li className="nav-item">
+        <span
+            className="nav-link active"
+            style={{ cursor: "pointer" }}
+            onClick={viewProfile}
         >
-          <b className="text-color">Logout</b>
-        </Link>
+          <b className="text-color">Profilim</b>
+        </span>
+        </li>
+
+        <li className="nav-item">
+        <span
+            className="nav-link active"
+            style={{ cursor: "pointer" }}
+            onClick={userLogout}
+        >
+          <b className="text-color">Çıkış Yap</b>
+        </span>
+        </li>
+
         <ToastContainer />
-      </li>
-    </ul>
+      </ul>
   );
 };
 
