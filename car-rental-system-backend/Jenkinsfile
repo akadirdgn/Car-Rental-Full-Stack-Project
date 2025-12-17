@@ -2,24 +2,51 @@ pipeline {
     agent any
 
     tools {
-        // Manage Jenkins -> Tools kısmında verdiğin ismin aynısı olmalı
+        // Ekran görüntüsünde başarıyla tanımladığın Maven versiyonu
         maven 'Maven 3.9.6' 
     }
 
     stages {
-        stage('1. Checkout') {
+        stage('1. Checkout (5 Puan)') {
             steps {
-                echo 'Kodlar GitHubdan cekiliyor...'
                 checkout scm
             }
         }
 
-        stage('2. Build') {
+        stage('2. Build (5 Puan)') {
             steps {
-                echo 'Backend projesi derleniyor...'
-                // Dizin backend klasörü olduğu için komutu o klasörde çalıştırmalıyız
                 dir('car-rental-system-backend') {
                     bat 'mvn clean install -DskipTests'
+                }
+            }
+        }
+
+        stage('3. Birim Testleri (15 Puan)') {
+            steps {
+                dir('car-rental-system-backend') {
+                    // Sadece Unit Testleri çalıştırır
+                    bat 'mvn test'
+                }
+            }
+            post {
+                always {
+                    // Test sonuçlarını Jenkins'e raporlar
+                    junit 'car-rental-system-backend/target/surefire-reports/*.xml'
+                }
+            }
+        }
+
+        stage('4. Entegrasyon Testleri (15 Puan)') {
+            steps {
+                dir('car-rental-system-backend') {
+                    // Integration testleri genellikle 'verify' fazında çalışır
+                    bat 'mvn verify -DskipUnitTests' 
+                }
+            }
+            post {
+                always {
+                    // Entegrasyon testi sonuçlarını raporlar
+                    junit 'car-rental-system-backend/target/failsafe-reports/*.xml'
                 }
             }
         }
