@@ -1,139 +1,86 @@
 # 🚗 Car Rental System
 
-A robust and modern full-stack car rental application designed to streamline vehicle booking and management. Built with **Spring Boot** for the backend and **React** for the frontend, this system offers a seamless experience for both customers and administrators.
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
 
-![Project Banner](https://placehold.co/1200x400?text=Car+Rental+System+Preview)
-*(Replace this link with a real screenshot of your application)*
+> **Drive your journey with ease, comfort, and style.** 🌍
+
+**Car Rental System** is a comprehensive full-stack application designed to modernize the vehicle rental process. Built with the robust **Spring Boot** framework and a dynamic **React** frontend, it delivers a seamless experience for customers booking their next ride and administrators managing their fleet.
 
 ---
 
-## 🌟 Features
+## 🚀 Key Features
 
 ### 👤 User Panel
-- **User Authentication:** Secure registration and login (JWT-based).
-- **Vehicle Browsing:** View available cars with detailed descriptions and images.
-- **Booking System:** Easy-to-use interface to book vehicles for specific dates.
-- **My Bookings:** track status of past and current reservations.
-- **Responsive Design:** Fully optimized for desktop and mobile devices.
+- **Browse & Filter:** Explore a vast fleet of vehicles with advanced filtering options.
+- **Secure Booking:** Real-time availability checks and secure reservation processing.
+- **User Dashboard:** Manage profile, view booking history, and track status.
+- **Responsive Interface:** Optimized for a smooth experience on any device.
 
 ### 🛡️ Admin Dashboard
-- **Dashboard Overview:** key metrics and statistics.
-- **Car Management:** Add, update, and remove vehicles from the fleet.
-- **Booking Management:** Approve or reject customer reservations.
-- **User Management:** Oversee registered users.
+- **Fleet Management:** Add, update, or decommission vehicles with ease.
+- **Reservation Control:** Approve or reject bookings and view detailed itineraries.
+- **User Oversight:** Manage registered users and handle support queries.
+- **Data Insights:** Visualize key metrics like rental frequency and revenue.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Technology Stack
 
-### Frontend
-- **Framework:** [React](https://reactjs.org/) (v18)
-- **Styling:** [Bootstrap 5](https://getbootstrap.com/), [React Bootstrap](https://react-bootstrap.github.io/)
-- **HTTP Client:** [Axios](https://axios-http.com/)
-- **Routing:** [React Router DOM](https://reactrouter.com/) (v6)
-- **Notifications:** [React Toastify](https://fkhadra.github.io/react-toastify/)
-
-### Backend
-- **Framework:** [Spring Boot](https://spring.io/projects/spring-boot) (v3.2.3)
-- **Language:** Java 17
-- **Security:** Spring Security & JWT (JSON Web Tokens)
-- **Database Search:** Spring Data JPA
-- **Database:** PostgreSQL
-- **PDF Generation:** OpenPDF
+*   **Frontend:** React (v18), Bootstrap 5, Axios, React Toastify
+*   **Backend:** Spring Boot (v3.2), Spring Security (JWT), Spring Data JPA
+*   **Database:** PostgreSQL
+*   **Tools:** Maven, OpenPDF (for report generation)
 
 ---
 
-## 📂 Project Structure
+## � Data Model
 
-The project is divided into two main applications:
+The application utilizes a relational database structure designed for integrity and scalability:
 
-*   **`car-rental-system-backend`**: RESTful API server.
-*   **`car-rental-system-frontend`**: React single-page application.
-
----
-
-## 🏁 Getting Started
-
-Follow these instructions to set up the project locally.
-
-### Prerequisites
-- **Node.js** and **npm** installed.
-- **Java Development Kit (JDK) 17** or later.
-- **Maven** installed.
-- **PostgreSQL** installed and running.
-
----
-
-### 🔙 Backend Setup
-
-1.  **Navigate to the backend directory:**
-    ```bash
-    cd car-rental-system-backend
-    ```
-
-2.  **Configure Database:**
-    *   Create a PostgreSQL database (e.g., `car_rental_db`).
-    *   Open `src/main/resources/application.properties` (or `application.yml`) and update the database credentials:
-        ```properties
-        spring.datasource.url=jdbc:postgresql://localhost:5432/car_rental_db
-        spring.datasource.username=your_username
-        spring.datasource.password=your_password
-        ```
-
-3.  **Run the Application:**
-    You can run it using the Maven wrapper or your IDE.
-    ```bash
-    ./mvnw spring-boot:run
-    ```
-    The backend server will start on `http://localhost:8080`.
-
----
-
-### 🖥️ Frontend Setup
-
-1.  **Navigate to the frontend directory:**
-    ```bash
-    cd car-rental-system-frontend
-    ```
-
-2.  **Install Dependencies:**
-    ```bash
-    npm install
-    ```
-
-3.  **Configure API Endpoint (Optional):**
-    If your backend runs on a different port, check the Axios configuration (usually in a `service` folder or environment file) to ensure it points to the correct backend URL.
-
-4.  **Start the Development Server:**
-    ```bash
-    npm start
-    ```
-    The application will open in your browser at `http://localhost:3000`.
+1.  **User:** Stores customer and admin profiles, authentication details.
+2.  **Vehicle:** Core entity representing cars with attributes like model, year, and status.
+3.  **Variant:** Defines specific car variations (e.g., color, transmission type).
+4.  **Booking:** Connects users to vehicles for specific timeframes.
+5.  **Payment:** Tracks transaction details for reservations.
+6.  **Address:** Stores user and pickup/drop-off location data.
+7.  **DrivingLicense:** Validates user eligibility for rentals.
+8.  **Company:** Manages company-specific data for fleet owners.
 
 ---
 
 ## 📸 Screenshots
 
-| Home Page | Car Details |
-|-----------|-------------|
-| ![Home](https://placehold.co/600x400?text=Home+Page) | ![Detail](https://placehold.co/600x400?text=Car+Details) |
+| Home & Search | functionality |
+|:---:|:---:|
+| ![Home](https://via.placeholder.com/500x300?text=Home+Page) | ![Search](https://via.placeholder.com/500x300?text=Search+Results) |
 
-| Admin Dashboard | Booking Flow |
-|-----------------|--------------|
-| ![Admin](https://placehold.co/600x400?text=Admin+Dashboard) | ![Booking](https://placehold.co/600x400?text=Booking+Flow) |
-
-*(Replace these placeholders with actual screenshots from your `license-image` or `variant-image` folders)*
+| Booking Process | Admin Dashboard |
+|:---:|:---:|
+| ![Booking](https://via.placeholder.com/500x300?text=Booking+Flow) | ![Admin](https://via.placeholder.com/500x300?text=Admin+Panel) |
 
 ---
 
-## 🤝 Contributing
+## 🏁 Getting Started
 
-Contributions are welcome! Please follow these steps:
-1.  Fork the repository.
-2.  Create a feature branch (`git checkout -b feature/NewFeature`).
-3.  Commit your changes (`git commit -m 'Add NewFeature'`).
-4.  Push to the branch (`git push origin feature/NewFeature`).
-5.  Open a Pull Request.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/akadirdgn/Car-Rental-Full-Stack-Project.git
+    cd Car-Rental-Full-Stack-Project
+    ```
+
+2.  **Backend Setup:**
+    - Navigate to `car-rental-system-backend`.
+    - Configure PostgreSQL credentials in `application.properties`.
+    - Run: `./mvnw spring-boot:run`
+
+3.  **Frontend Setup:**
+    - Navigate to `car-rental-system-frontend`.
+    - Install dependencies: `npm install`
+    - Start app: `npm start`
 
 ---
 
