@@ -42,7 +42,7 @@ const MyBooking = () => {
   const cancelBooking = (e, bookingId) => {
     console.log(bookingId);
     if (!bookingId) {
-      toast.error("Missing Input", {
+      toast.error("Eksik Bilgi", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -100,7 +100,7 @@ const MyBooking = () => {
         })
         .catch((error) => {
           console.error(error);
-          toast.error("It seems server is down", {
+          toast.error("Sunucu hatası oluştu", {
             position: "top-center",
             autoClose: 1000,
             hideProgressBar: false,
@@ -139,7 +139,7 @@ const MyBooking = () => {
             height: "50px",
           }}
         >
-          <h2>Tüm Rezerasyonlar</h2>
+          <h2>Tüm Rezervasyonlar</h2>
         </div>
         <div
           className="card-body"
@@ -171,7 +171,11 @@ const MyBooking = () => {
                   const paidBookings = JSON.parse(localStorage.getItem("fake_paid_bookings") || "[]");
                   const isFakePaid = paidBookings.includes(booking.bookingId) || paidBookings.includes(booking.id);
                   // Override status if fake paid
-                  const displayStatus = isFakePaid ? "Paid & Confirmed" : booking.status;
+                  const displayStatus = isFakePaid ? "Ödendi & Onaylandı" :
+                    (booking.status === "Approved" ? "Onaylandı" :
+                      (booking.status === "Pending" ? "Beklemede" :
+                        (booking.status === "Cancelled" ? "İptal Edildi" :
+                          (booking.status === "Rejected" ? "Reddedildi" : booking.status))));
                   const isPaymentDone = isFakePaid || booking.payment;
 
                   return (
@@ -224,16 +228,16 @@ const MyBooking = () => {
                         <b>
                           {booking.vehicle
                             ? booking.vehicle.registrationNumber
-                            : "NA"}
+                            : "Yok"}
                         </b>
                       </td>
                       <td>
-                        <b>{isPaymentDone ? "Paid" : "Pending"}</b>
+                        <b>{isPaymentDone ? "Ödendi" : "Beklemede"}</b>
                       </td>
                       <td>
                         <div className="d-flex flex-column align-items-center gap-2">
                           {(() => {
-                            if (displayStatus === "Approved" && !isFakePaid) {
+                            if (booking.status === "Approved" && !isFakePaid) {
                               return (
                                 <button
                                   onClick={() => payAndConfirm(booking)}
@@ -247,8 +251,9 @@ const MyBooking = () => {
 
                           {(() => {
                             if (
-                              displayStatus !== "Paid & Confirmed" &&
-                              displayStatus !== "Cancelled"
+                              booking.status !== "Paid & Confirmed" &&
+                              booking.status !== "Cancelled" &&
+                              booking.status !== "Cancel"
                             ) {
                               return (
                                 <button

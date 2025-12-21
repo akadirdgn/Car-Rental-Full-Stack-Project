@@ -75,7 +75,7 @@ const UserRegister = () => {
               window.location.reload(true);
             }, 1000); // Redirect after 3 seconds
           } else {
-            toast.error("It seems server is down", {
+            toast.error("Sunucu hatası oluştu", {
               position: "top-center",
               autoClose: 1000,
               hideProgressBar: false,
@@ -93,7 +93,7 @@ const UserRegister = () => {
       })
       .catch((error) => {
         console.error(error);
-        toast.error("It seems server is down", {
+        toast.error("Sunucu hatası oluştu", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: false,
@@ -157,7 +157,7 @@ const UserRegister = () => {
 
                 <div className="col-md-6 mb-3 text-color">
                   <b>
-                    <label className="form-label">Email</label>
+                    <label className="form-label">E-posta</label>
                   </b>
                   <input
                     type="email"

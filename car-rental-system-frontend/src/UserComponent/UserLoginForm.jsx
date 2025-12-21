@@ -86,7 +86,7 @@ const UserLoginForm = () => {
       })
       .catch((error) => {
         console.error(error);
-        toast.error("It seems server is down", {
+        toast.error("Sunucu hatası oluştu", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: false,
@@ -132,7 +132,7 @@ const UserLoginForm = () => {
 
                 <div className="mb-3">
                   <label for="emailId" class="form-label">
-                    <b>Email</b>
+                    <b>E-posta</b>
                   </label>
                   <input
                     type="email"

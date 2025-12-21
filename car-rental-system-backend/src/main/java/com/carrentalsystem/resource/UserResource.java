@@ -78,14 +78,14 @@ public class UserResource {
 		CommonApiResponse response = new CommonApiResponse();
 
 		if (registerRequest == null) {
-			response.setResponseMessage("user is null");
+			response.setResponseMessage("kullanıcı boş olamaz");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
 
 		if (registerRequest.getEmailId() == null || registerRequest.getPassword() == null) {
-			response.setResponseMessage("missing input");
+			response.setResponseMessage("eksik bilgi");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -95,7 +95,7 @@ public class UserResource {
 				ActiveStatus.ACTIVE.value());
 
 		if (existingUser != null) {
-			response.setResponseMessage("User already register with this Email");
+			response.setResponseMessage("Bu E-posta adresi ile kayıtlı kullanıcı zaten var");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -110,13 +110,13 @@ public class UserResource {
 		existingUser = this.userService.addUser(user);
 
 		if (existingUser == null) {
-			response.setResponseMessage("failed to register admin");
+			response.setResponseMessage("admin kaydı başarısız oldu");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
 
-		response.setResponseMessage("Admin registered Successfully");
+		response.setResponseMessage("Admin Başarıyla Kaydedildi");
 		response.setSuccess(true);
 
 		LOG.info("Response Sent!!!");
@@ -131,7 +131,7 @@ public class UserResource {
 		CommonApiResponse response = new CommonApiResponse();
 
 		if (request == null) {
-			response.setResponseMessage("user is null");
+			response.setResponseMessage("kullanıcı boş olamaz");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -140,14 +140,14 @@ public class UserResource {
 		User existingUser = this.userService.getUserByEmailAndStatus(request.getEmailId(), ActiveStatus.ACTIVE.value());
 
 		if (existingUser != null) {
-			response.setResponseMessage("User with this Email Id already resgistered!!!");
+			response.setResponseMessage("Bu E-posta adresi ile kayıtlı kullanıcı zaten var!!!");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
 
 		if (request.getRole() == null) {
-			response.setResponseMessage("bad request ,Role is missing");
+			response.setResponseMessage("hatalı istek, Rol eksik");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -168,7 +168,7 @@ public class UserResource {
 		Address savedAddress = this.addressService.addAddress(address);
 
 		if (savedAddress == null) {
-			throw new UserSaveFailedException("Registration Failed because of Technical issue:(");
+			throw new UserSaveFailedException("Kayıt Başarısız, teknik bir sorun oluştu:(");
 		}
 
 		user.setAddress(savedAddress);
@@ -176,10 +176,10 @@ public class UserResource {
 		existingUser = this.userService.addUser(user);
 
 		if (existingUser == null) {
-			throw new UserSaveFailedException("Registration Failed because of Technical issue:(");
+			throw new UserSaveFailedException("Kayıt Başarısız, teknik bir sorun oluştu:(");
 		}
 
-		response.setResponseMessage("User registered Successfully");
+		response.setResponseMessage("Kullanıcı Başarıyla Kaydedildi");
 		response.setSuccess(true);
 
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
@@ -192,7 +192,7 @@ public class UserResource {
 		UserLoginResponse response = new UserLoginResponse();
 
 		if (loginRequest == null) {
-			response.setResponseMessage("Missing Input");
+			response.setResponseMessage("Eksik Bilgi");
 			response.setSuccess(false);
 
 			return new ResponseEntity<UserLoginResponse>(response, HttpStatus.BAD_REQUEST);
@@ -207,7 +207,7 @@ public class UserResource {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmailId(),
 					loginRequest.getPassword(), authorities));
 		} catch (Exception ex) {
-			response.setResponseMessage("Invalid email or password.");
+			response.setResponseMessage("Geçersiz e-posta veya şifre.");
 			response.setSuccess(false);
 			return new ResponseEntity<UserLoginResponse>(response, HttpStatus.BAD_REQUEST);
 		}
@@ -222,14 +222,14 @@ public class UserResource {
 		// user is authenticated
 		if (jwtToken != null) {
 			response.setUser(userDto);
-			response.setResponseMessage("Logged in sucessful");
+			response.setResponseMessage("Giriş Başarılı");
 			response.setSuccess(true);
 			response.setJwtToken(jwtToken);
 			return new ResponseEntity<UserLoginResponse>(response, HttpStatus.OK);
 		}
 
 		else {
-			response.setResponseMessage("Failed to login");
+			response.setResponseMessage("Giriş Başarısız");
 			response.setSuccess(false);
 			return new ResponseEntity<UserLoginResponse>(response, HttpStatus.BAD_REQUEST);
 		}
@@ -241,7 +241,7 @@ public class UserResource {
 		UserResponseDto response = new UserResponseDto();
 
 		if (role == null) {
-			response.setResponseMessage("missing role");
+			response.setResponseMessage("Kullanıcı Bulunamadı");
 			response.setSuccess(false);
 			return new ResponseEntity<UserResponseDto>(response, HttpStatus.BAD_REQUEST);
 		}
@@ -251,7 +251,7 @@ public class UserResource {
 		users = this.userService.getUserByRoleAndStatus(role, ActiveStatus.ACTIVE.value());
 
 		if (users.isEmpty()) {
-			response.setResponseMessage("No Users Found");
+			response.setResponseMessage("Kullanıcı Bulunamadı");
 			response.setSuccess(false);
 			return new ResponseEntity<UserResponseDto>(response, HttpStatus.OK);
 		}
@@ -280,14 +280,14 @@ public class UserResource {
 		CommonApiResponse response = new CommonApiResponse();
 
 		if (request == null) {
-			response.setResponseMessage("bad request, missing data");
+			response.setResponseMessage("hatalı istek, veri eksik");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
 
 		if (request.getUserId() == 0) {
-			response.setResponseMessage("bad request, user id is missing");
+			response.setResponseMessage("hatalı istek, kullanıcı id eksik");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -301,10 +301,10 @@ public class UserResource {
 		User updatedUser = this.userService.updateUser(user);
 
 		if (updatedUser == null) {
-			throw new UserSaveFailedException("Failed to update the User status");
+			throw new UserSaveFailedException("Kullanıcı durumu güncellenemedi");
 		}
 
-		response.setResponseMessage("User " + request.getStatus() + " Successfully!!!");
+		response.setResponseMessage("Kullanıcı " + request.getStatus() + " Başarıyla!!!");
 		response.setSuccess(true);
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
 
@@ -315,7 +315,7 @@ public class UserResource {
 		UserResponseDto response = new UserResponseDto();
 
 		if (userId == 0) {
-			response.setResponseMessage("Invalid Input");
+			response.setResponseMessage("Geçersiz Giriş");
 			response.setSuccess(false);
 			return new ResponseEntity<UserResponseDto>(response, HttpStatus.BAD_REQUEST);
 		}
@@ -326,7 +326,7 @@ public class UserResource {
 		users.add(user);
 
 		if (users.isEmpty()) {
-			response.setResponseMessage("No Users Found");
+			response.setResponseMessage("Kullanıcı Bulunamadı");
 			response.setSuccess(false);
 			return new ResponseEntity<UserResponseDto>(response, HttpStatus.OK);
 		}
@@ -342,7 +342,7 @@ public class UserResource {
 		}
 
 		response.setUsers(userDtos);
-		response.setResponseMessage("User Fetched Successfully");
+		response.setResponseMessage("Kullanıcı Başarıyla Getirildi");
 		response.setSuccess(true);
 
 		return new ResponseEntity<UserResponseDto>(response, HttpStatus.OK);
@@ -353,7 +353,7 @@ public class UserResource {
 		CommonApiResponse response = new CommonApiResponse();
 
 		if (userId == 0) {
-			response.setResponseMessage("user id missing");
+			response.setResponseMessage("kullanıcı id eksik");
 			response.setSuccess(false);
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
@@ -361,7 +361,7 @@ public class UserResource {
 		User user = this.userService.getUserById(userId);
 
 		if (user == null) {
-			response.setResponseMessage("User not found");
+			response.setResponseMessage("Kullanıcı bulunamadı");
 			response.setSuccess(false);
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
@@ -371,12 +371,12 @@ public class UserResource {
 		User updatedUser = this.userService.updateUser(user);
 
 		if (updatedUser == null) {
-			response.setResponseMessage("Failed to Delete the User");
+			response.setResponseMessage("Kullanıcı Silinemedi");
 			response.setSuccess(false);
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		response.setResponseMessage("User Deleted Successful!!");
+		response.setResponseMessage("Kullanıcı Başarıyla Silindi!!");
 		response.setSuccess(true);
 
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
@@ -389,7 +389,7 @@ public class UserResource {
 		CommonApiResponse response = new CommonApiResponse();
 
 		if (request == null) {
-			response.setResponseMessage("bad request - missing input");
+			response.setResponseMessage("hatalı istek - veri eksik");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -397,7 +397,7 @@ public class UserResource {
 
 		if (request.getCustomerId() == null || request.getLicenseNumber() == null || request.getLicensePic() == null
 				|| request.getExpirationDate() == null) {
-			response.setResponseMessage("missing input");
+			response.setResponseMessage("eksik bilgi");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -406,7 +406,7 @@ public class UserResource {
 		User customer = this.userService.getUserById(request.getCustomerId());
 
 		if (customer == null) {
-			response.setResponseMessage("Customer not found");
+			response.setResponseMessage("Müşteri bulunamadı");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -422,7 +422,7 @@ public class UserResource {
 		DrivingLicense addedLicense = this.drivingLicenseService.addLicense(license);
 
 		if (addedLicense == null) {
-			throw new UserSaveFailedException("Failed to save the Driving license!!!");
+			throw new UserSaveFailedException("Sürücü belgesi kaydedilemedi!!!");
 		}
 
 		customer.setLicense(addedLicense);
@@ -430,10 +430,10 @@ public class UserResource {
 		User updatedCustomer = this.userService.updateUser(customer);
 
 		if (updatedCustomer == null) {
-			throw new UserSaveFailedException("Failed to save the Driving license!!!");
+			throw new UserSaveFailedException("Sürücü belgesi kaydedilemedi!!!");
 		}
 
-		response.setResponseMessage("Customer Driving License Added successful!!!");
+		response.setResponseMessage("Müşteri Sürücü Belgesi Başarıyla Eklendi!!!");
 		response.setSuccess(true);
 
 		LOG.info("Response Sent!!!");
