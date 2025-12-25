@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import dollor from "../images/dollor_logo.png";
 import seat from "../images/seat.png";
 import rupee from "../images/rupee.png";
 import company from "../images/company.png";

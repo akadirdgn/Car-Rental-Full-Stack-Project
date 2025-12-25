@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import React from "react";
 import { API_BASE_URL } from "../apiConfig";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
 
 const MyBooking = () => {
   const [bookings, setBookings] = useState([]);
-  const customer_jwtToken = sessionStorage.getItem("customer-jwtToken");
+
 
   const user = JSON.parse(sessionStorage.getItem("active-customer"));
 
