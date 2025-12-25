@@ -37,4 +37,8 @@
       <version>5.7.0</version>
     </dependency>
   </dependencies>
+
+  <build>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+  </build>
 </project>
