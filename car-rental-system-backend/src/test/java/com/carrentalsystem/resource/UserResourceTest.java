@@ -43,7 +43,7 @@ public class UserResourceTest {
     // Security layer.
     @Test
     public void testUnauthorizedAccess() throws Exception {
-        mockMvc.perform(get("/api/user/customer/all"))
+        mockMvc.perform(get("/api/user/fetch/role-wise").param("role", "CUSTOMER"))
                 .andExpect(status().isForbidden()); // or isUnauthorized() depending on config
     }
 }
