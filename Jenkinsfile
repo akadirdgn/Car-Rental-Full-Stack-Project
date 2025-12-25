@@ -28,8 +28,7 @@ pipeline {
                     echo 'Building Frontend...'
                     dir('car-rental-system-frontend') {
                          bat 'npm install'
-                         // Disable CI strict mode to prevent warnings from breaking build
-                         bat 'set CI=false && npm run build'
+                         bat 'npm run build'
                     }
                 }
             }
