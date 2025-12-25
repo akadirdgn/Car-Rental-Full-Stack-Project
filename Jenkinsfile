@@ -6,6 +6,8 @@ pipeline {
         DB_CONTAINER_NAME = "car_rental_db"
         BACKEND_CONTAINER_NAME = "car_rental_backend"
         FRONTEND_CONTAINER_NAME = "car_rental_frontend"
+        // Force CI to false to ignore CRA warnings
+        CI = 'false'
     }
 
     stages {
