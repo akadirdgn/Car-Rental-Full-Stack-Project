@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import React from "react";
+import { API_BASE_URL } from "../apiConfig";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
@@ -15,7 +16,7 @@ const MyBooking = () => {
 
   const retrieveAllBookings = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/booking/fetch/customer-wise?customerId=" +
+      API_BASE_URL + "/booking/fetch/customer-wise?customerId=" +
       user.id
     );
     return response.data;
@@ -57,7 +58,7 @@ const MyBooking = () => {
         bookingId: bookingId,
       };
 
-      fetch("http://localhost:8080/api/booking/cancel", {
+      fetch(API_BASE_URL + "/booking/cancel", {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -175,7 +176,8 @@ const MyBooking = () => {
                     (booking.status === "Approved" ? "Onaylandı" :
                       (booking.status === "Pending" ? "Beklemede" :
                         (booking.status === "Cancelled" ? "İptal Edildi" :
-                          (booking.status === "Rejected" ? "Reddedildi" : booking.status))));
+                          (booking.status === "Rejected" ? "Reddedildi" :
+                            (booking.status === "Paid & Confirmed" ? "Ödendi & Onaylandı" : booking.status)))));
                   const isPaymentDone = isFakePaid || booking.payment;
 
                   return (
@@ -183,7 +185,7 @@ const MyBooking = () => {
                       <td>
                         <img
                           src={
-                            "http://localhost:8080/api/variant/" +
+                            API_BASE_URL + "/variant/" +
                             booking.variant.image
                           }
                           class="img-fluid"

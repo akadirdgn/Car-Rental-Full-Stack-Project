@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { API_BASE_URL } from "../apiConfig";
 
 const ViewCustomerBooking = () => {
   const location = useLocation();
@@ -32,7 +33,7 @@ const ViewCustomerBooking = () => {
         <div className="col-sm-4 mt-2">
           <div className="card form-card custom-bg">
             <img
-              src={`http://localhost:8080/api/variant/${booking.variant?.image}`}
+              src={API_BASE_URL + `/variant/${booking.variant?.image}`}
               className="card-img-top rounded img-fluid"
               alt="araç"
             />
@@ -117,7 +118,7 @@ const ViewCustomerBooking = () => {
               {booking.customer?.license?.licensePic && (
                 <div className="d-flex justify-content-center mt-3">
                   <img
-                    src={`http://localhost:8080/api/user/${booking.customer.license.licensePic}`}
+                    src={API_BASE_URL + `/user/${booking.customer.license.licensePic}`}
                     className="img-fluid rounded"
                     style={{ maxWidth: "250px" }}
                     alt="ehliyet"

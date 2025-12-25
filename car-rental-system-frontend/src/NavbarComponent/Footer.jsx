@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 const Footer = () => {
+  // Kullanıcı giriş durumunu kontrol et
+  const customer = JSON.parse(sessionStorage.getItem("active-customer"));
+  const admin = JSON.parse(sessionStorage.getItem("active-admin"));
+  const isLoggedIn = customer !== null || admin !== null;
+
   return (
     <div>
       <div class="container my-5">
@@ -17,32 +22,35 @@ const Footer = () => {
                   </p>
                 </div>
 
-               </div>
-               </section>
+              </div>
+            </section>
 
             <hr class="mb-4" />
 
-            <section class="">
-              <p class="d-flex justify-content-center align-items-center">
-                <span class="me-3 custom-bg-text">
-                  <b>Buradan Giriş Yapın</b>
-                </span>
-                <Link to="/user/login" class="active">
-                  <button
-                    type="button"
-                    class="btn btn-outline-light btn-rounded bg-color custom-bg-text"
-                  >
-                    <b> Giriş Yap</b>
-                  </button>
-                </Link>
-              </p>
-            </section>
+            {/* Sadece giriş yapmamış kullanıcılara "Giriş Yap" butonu göster */}
+            {!isLoggedIn && (
+              <section class="">
+                <p class="d-flex justify-content-center align-items-center">
+                  <span class="me-3 custom-bg-text">
+                    <b>Buradan Giriş Yapın</b>
+                  </span>
+                  <Link to="/user/login" class="active">
+                    <button
+                      type="button"
+                      class="btn btn-outline-light btn-rounded bg-color custom-bg-text"
+                    >
+                      <b> Giriş Yap</b>
+                    </button>
+                  </Link>
+                </p>
+              </section>
+            )}
 
             <hr class="mb-4" />
           </div>
 
           <div class="text-center text-color">
-           
+
           </div>
         </footer>
       </div>

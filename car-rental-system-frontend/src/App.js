@@ -13,6 +13,7 @@ import ViewAllCustomers from "./UserComponent/ViewAllCustomers";
 import UpdateVariantForm from "./CarComponent/UpdateVariantForm";
 import ViewVariants from "./CarComponent/ViewVariants";
 import ViewVehicles from "./CarComponent/ViewVehicles";
+import MyFavorites from "./FavoriteComponent/MyFavorites";
 import AllBookings from "./BookingComponent/AllBookings";
 import ViewCustomerBooking from "./BookingComponent/ViewCustomerBooking";
 import UserProfile from "./UserComponent/UserProfile";
@@ -55,6 +56,7 @@ function App() {
         />
         <Route path="/customer/bookings" element={<MyBooking />} />
         <Route path="/customer/booking/payment" element={<BookingPayment />} />
+        <Route path="/customer/favorites" element={<MyFavorites />} />
       </Routes>
     </div>
   );

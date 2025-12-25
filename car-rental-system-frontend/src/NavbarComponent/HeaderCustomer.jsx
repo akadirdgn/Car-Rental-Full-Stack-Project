@@ -31,38 +31,47 @@ const HeaderCustomer = () => {
   };
 
   return (
-      <ul className="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-        <li className="nav-item">
-          <Link
-              to="/customer/bookings"
-              className="nav-link active"
-          >
-            <b className="text-color">Rezervasyonlarım</b>
-          </Link>
-        </li>
+    <ul className="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
+      <li className="nav-item">
+        <Link
+          to="/customer/bookings"
+          className="nav-link active"
+        >
+          <b className="text-color">Rezervasyonlarım</b>
+        </Link>
+      </li>
 
-        <li className="nav-item">
+      <li className="nav-item">
+        <Link
+          to="/customer/favorites"
+          className="nav-link active"
+        >
+          <b className="text-color">Favorilerim</b>
+        </Link>
+      </li>
+
+      <li className="nav-item">
         <span
-            className="nav-link active"
-            style={{ cursor: "pointer" }}
-            onClick={viewProfile}
+          className="nav-link active"
+          style={{ cursor: "pointer" }}
+          onClick={viewProfile}
         >
           <b className="text-color">Profilim</b>
         </span>
-        </li>
+      </li>
 
-        <li className="nav-item">
+      <li className="nav-item">
         <span
-            className="nav-link active"
-            style={{ cursor: "pointer" }}
-            onClick={userLogout}
+          className="nav-link active"
+          style={{ cursor: "pointer" }}
+          onClick={userLogout}
         >
           <b className="text-color">Çıkış Yap</b>
         </span>
-        </li>
+      </li>
 
-        <ToastContainer />
-      </ul>
+      <ToastContainer />
+    </ul>
   );
 };
 

@@ -10,6 +10,9 @@ import model from "../images/model.png";
 import year from "../images/year.png";
 import ac from "../images/ac.png";
 import rent from "../images/rent.png";
+import ReviewSection from "../ReviewComponent/ReviewSection";
+import FavoriteButton from "../FavoriteComponent/FavoriteButton";
+import { API_BASE_URL } from "../apiConfig";
 
 const ViewVariantDetail = () => {
   const { variantId } = useParams();
@@ -21,7 +24,7 @@ const ViewVariantDetail = () => {
   });
 
   const customer = JSON.parse(sessionStorage.getItem("active-customer"));
-  const customer_jwtToken = sessionStorage.getItem("customer-jwtToken");
+
 
   const navigate = useNavigate();
 
@@ -36,7 +39,7 @@ const ViewVariantDetail = () => {
 
   const retrieveVariant = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/variant/fetch?variantId=" + variantId
+      API_BASE_URL + "/variant/fetch?variantId=" + variantId
     );
     console.log(response.data);
     return response.data;
@@ -51,14 +54,7 @@ const ViewVariantDetail = () => {
     };
 
     getVariant();
-  }, []);
-
-  const formatDateFromEpoch = (epochTime) => {
-    const date = new Date(Number(epochTime));
-    const formattedDate = date.toLocaleString(); // Adjust the format as needed
-
-    return formattedDate;
-  };
+  }, [variantId]);
 
   const bookCar = (e) => {
     e.preventDefault();
@@ -77,7 +73,7 @@ const ViewVariantDetail = () => {
     } else {
       booking.customerId = customer.id;
       booking.vehicleId = variantId;
-      fetch("http://localhost:8080/api/booking/add", {
+      fetch(API_BASE_URL + "/booking/add", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -141,7 +137,7 @@ const ViewVariantDetail = () => {
               {/* Left side - Variant */}
               <div className="col-md-4">
                 <img
-                  src={"http://localhost:8080/api/variant/" + variant.image}
+                  src={API_BASE_URL + "/variant/" + variant.image}
                   className="card-img-top rounded img-fluid"
                   alt="Company Logo"
                   style={{
@@ -151,7 +147,13 @@ const ViewVariantDetail = () => {
               </div>
               {/* Right side - Variant Details */}
               <div className="col-md-8">
-                <h1 className="header-logo-color">{variant.name}</h1>
+                <div className="d-flex justify-content-between align-items-center">
+                  <h1 className="header-logo-color">{variant.name}</h1>
+                  <div className="ms-3">
+                    <FavoriteButton carId={variantId} />
+                  </div>
+                </div>
+
                 <p className="text-color">{variant.description}</p>
 
                 <h4 className="card-title d-flex justify-content-between header-logo-color mt-4">
@@ -304,6 +306,14 @@ const ViewVariantDetail = () => {
             </div>
           </div>
         </div>
+
+        {/* Reviews Section Integration */}
+        <div className="row mt-4">
+          <div className="col-md-12">
+            <ReviewSection carId={variantId} />
+          </div>
+        </div>
+
       </div>
     </div>
   );

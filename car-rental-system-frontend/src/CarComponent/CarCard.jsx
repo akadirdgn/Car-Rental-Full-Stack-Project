@@ -4,6 +4,7 @@ import seat from "../images/seat.png";
 import rupee from "../images/rupee.png";
 import company from "../images/company.png";
 import fuelType from "../images/fuel.png";
+import { API_BASE_URL } from "../apiConfig";
 
 const CarCard = (carVariant) => {
   return (
@@ -16,7 +17,7 @@ const CarCard = (carVariant) => {
         <div className="row g-0">
           <div className="col-md-4 d-flex align-items-center justify-content-center">
             <img
-              src={"http://localhost:8080/api/variant/" + carVariant.item.image}
+              src={API_BASE_URL + "/variant/" + carVariant.item.image}
               className="card-img-top rounded img-fluid"
               alt="Company Logo"
             />
