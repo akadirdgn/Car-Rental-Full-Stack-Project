@@ -9,7 +9,6 @@ const BookingPayment = () => {
 
   const booking = location.state;
 
-  // ✅ Hook HER ZAMAN en üstte
   const [paymentRequest, setPaymentRequest] = useState({
     bookingId: null,
     nameOnCard: "",
@@ -18,14 +17,12 @@ const BookingPayment = () => {
     expiryDate: "",
   });
 
-  // 🔴 booking yoksa geri dön
   useEffect(() => {
     if (!booking) {
       navigate("/customer/bookings");
     }
   }, [booking, navigate]);
 
-  // ✅ booking GELDİKTEN SONRA bookingId set et
   useEffect(() => {
     if (booking) {
       setPaymentRequest((prev) => ({
