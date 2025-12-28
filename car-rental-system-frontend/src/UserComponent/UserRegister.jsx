@@ -31,6 +31,59 @@ const UserRegister = () => {
   const saveUser = (e) => {
     e.preventDefault();
 
+    if (user.firstName === "" || user.lastName === "" || user.emailId === "" || user.password === "" || user.phoneNo === "" || user.city === "" || user.pincode === "" || user.street === "") {
+      toast.error("Lütfen tüm alanları doldurunuz", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
+    // Email validation
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(user.emailId)) {
+      toast.error("Lütfen geçerli bir e-posta adresi giriniz", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
+    if (user.password.length < 6) {
+      toast.error("Şifre en az 6 karakter olmalıdır", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
+    if (user.phoneNo.length < 10) {
+      toast.error("Lütfen geçerli bir telefon numarası giriniz", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
     let jwtToken;
 
     fetch("http://localhost:8080/api/user/register", {

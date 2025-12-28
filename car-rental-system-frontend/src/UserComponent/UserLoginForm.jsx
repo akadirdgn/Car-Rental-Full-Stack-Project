@@ -17,6 +17,21 @@ const UserLoginForm = () => {
   };
 
   const loginAction = (e) => {
+    e.preventDefault();
+
+    if (loginRequest.emailId === "" || loginRequest.password === "" || loginRequest.role === "") {
+      toast.error("Lütfen tüm alanları doldurunuz", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
     fetch("http://localhost:8080/api/user/login", {
       method: "POST",
       headers: {

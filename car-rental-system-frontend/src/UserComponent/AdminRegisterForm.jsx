@@ -14,6 +14,48 @@ const AdminRegisterForm = () => {
   };
 
   const registerAdmin = (e) => {
+    e.preventDefault();
+
+    if (!registerRequest.emailId || !registerRequest.password) {
+      toast.error("Lütfen tüm alanları doldurunuz", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
+    // Email validation
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(registerRequest.emailId)) {
+      toast.error("Lütfen geçerli bir e-posta adresi giriniz", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
+    if (registerRequest.password.length < 6) {
+      toast.error("Şifre en az 6 karakter olmalıdır", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
     fetch("http://localhost:8080/api/user/admin/register", {
       method: "POST",
       headers: {
