@@ -2,7 +2,11 @@ package com.carrentalsystem.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -17,11 +21,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.carrentalsystem.dto.AddDrivingLicenseRequest;
 import com.carrentalsystem.dto.CommonApiResponse;
 import com.carrentalsystem.dto.RegisterUserRequestDto;
 import com.carrentalsystem.dto.UserLoginRequest;
 import com.carrentalsystem.dto.UserLoginResponse;
+import com.carrentalsystem.dto.UserResponseDto;
+import com.carrentalsystem.dto.UserStatusUpdateRequestDto;
 import com.carrentalsystem.resource.UserResource;
+import org.springframework.mock.web.MockMultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(UserController.class)
@@ -33,6 +41,18 @@ public class UserControllerTest {
 
     @MockBean
     private UserResource userResource;
+
+    @MockBean
+    private com.carrentalsystem.service.UserService userService;
+
+    @MockBean
+    private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+
+    @MockBean
+    private com.carrentalsystem.utility.JwtUtils jwtUtils;
+
+    @MockBean
+    private com.carrentalsystem.config.CustomUserDetailsService customUserDetailsService;
 
     private ObjectMapper objectMapper;
 
@@ -89,5 +109,112 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.responseMessage").value("Login Successful"))
                 .andExpect(jsonPath("$.jwtToken").value("dummy-token"));
+    }
+
+    @Test
+    void testRegisterAdmin_Success() throws Exception {
+        RegisterUserRequestDto request = new RegisterUserRequestDto();
+        request.setEmailId("admin@example.com");
+        request.setPassword("admin123");
+
+        CommonApiResponse response = new CommonApiResponse();
+        response.setResponseMessage("Admin Registered Successfully");
+        response.setSuccess(true);
+
+        when(userResource.registerAdmin(any(RegisterUserRequestDto.class)))
+                .thenReturn(new ResponseEntity<>(response, HttpStatus.OK));
+
+        mockMvc.perform(post("/api/user/admin/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.responseMessage").value("Admin Registered Successfully"))
+                .andExpect(jsonPath("$.success").value(true));
+    }
+
+    @Test
+    void testFetchAllUsersByRole_Success() throws Exception {
+        UserResponseDto response = new UserResponseDto();
+        response.setResponseMessage("Users Fetched Successfully");
+        response.setSuccess(true);
+
+        when(userResource.getUsersByRole("Customer"))
+                .thenReturn(new ResponseEntity<>(response, HttpStatus.OK));
+
+        mockMvc.perform(get("/api/user/fetch/role-wise")
+                .param("role", "Customer"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.responseMessage").value("Users Fetched Successfully"));
+    }
+
+    @Test
+    void testUpdateUserStatus_Success() throws Exception {
+        UserStatusUpdateRequestDto request = new UserStatusUpdateRequestDto();
+        request.setUserId(1);
+        request.setStatus("Active");
+
+        CommonApiResponse response = new CommonApiResponse();
+        response.setResponseMessage("User Status Updated Successfully");
+        response.setSuccess(true);
+
+        when(userResource.updateUserStatus(any(UserStatusUpdateRequestDto.class)))
+                .thenReturn(new ResponseEntity<>(response, HttpStatus.OK));
+
+        mockMvc.perform(put("/api/user/update/status")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.responseMessage").value("User Status Updated Successfully"));
+    }
+
+    @Test
+    void testFetchUserById_Success() throws Exception {
+        UserResponseDto response = new UserResponseDto();
+        response.setResponseMessage("User Fetched Successfully");
+        response.setSuccess(true);
+
+        when(userResource.getUserById(1))
+                .thenReturn(new ResponseEntity<>(response, HttpStatus.OK));
+
+        mockMvc.perform(get("/api/user/fetch/user-id")
+                .param("userId", "1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.responseMessage").value("User Fetched Successfully"));
+    }
+
+    @Test
+    void testDeleteUserById_Success() throws Exception {
+        CommonApiResponse response = new CommonApiResponse();
+        response.setResponseMessage("User Deleted Successfully");
+        response.setSuccess(true);
+
+        when(userResource.deleteUserById(1))
+                .thenReturn(new ResponseEntity<>(response, HttpStatus.OK));
+
+        mockMvc.perform(delete("/api/user/delete/user-id")
+                .param("userId", "1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.responseMessage").value("User Deleted Successfully"));
+    }
+
+    @Test
+    void testAddCustomerDrivingLicense_Success() throws Exception {
+        MockMultipartFile file = new MockMultipartFile("licensePic", "license.jpg", "image/jpeg",
+                "some image data".getBytes());
+
+        CommonApiResponse response = new CommonApiResponse();
+        response.setResponseMessage("Driving License Added Successfully");
+        response.setSuccess(true);
+
+        when(userResource.addCustomerDrivingLicense(any(AddDrivingLicenseRequest.class)))
+                .thenReturn(new ResponseEntity<>(response, HttpStatus.OK));
+
+        mockMvc.perform(multipart("/api/user/add/driving-licence")
+                .file(file)
+                .param("customerId", "1")
+                .param("licenseNumber", "DL12345")
+                .param("expirationDate", "2030-01-01"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.responseMessage").value("Driving License Added Successfully"));
     }
 }
