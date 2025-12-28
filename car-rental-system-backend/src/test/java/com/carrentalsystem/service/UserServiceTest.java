@@ -48,4 +48,33 @@ public class UserServiceTest {
         assertEquals("test@example.com", savedUser.getEmailId());
         assertEquals("Customer", savedUser.getRole());
     }
+
+    @Test
+    void testGetUserById_Found() {
+        when(userDao.findById(1)).thenReturn(java.util.Optional.of(sampleUser));
+
+        User foundUser = userService.getUserById(1);
+
+        assertNotNull(foundUser);
+        assertEquals(1, foundUser.getId());
+    }
+
+    @Test
+    void testGetUserById_NotFound() {
+        when(userDao.findById(99)).thenReturn(java.util.Optional.empty());
+
+        User foundUser = userService.getUserById(99);
+
+        org.junit.jupiter.api.Assertions.assertNull(foundUser);
+    }
+
+    @Test
+    void testGetUserByEmailAndStatus() {
+        when(userDao.findByEmailIdAndStatus("test@example.com", "Active")).thenReturn(sampleUser);
+
+        User foundUser = userService.getUserByEmailAndStatus("test@example.com", "Active");
+
+        assertNotNull(foundUser);
+        assertEquals("test@example.com", foundUser.getEmailId());
+    }
 }
