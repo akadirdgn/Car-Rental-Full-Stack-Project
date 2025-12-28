@@ -12,10 +12,10 @@ public class BookingTest extends BaseTest {
 
     private void loginCustomer() throws InterruptedException {
         driver.get(baseUrl + "/user/login");
-        driver.findElement(By.name("role")).sendKeys("Müşteri");
-        driver.findElement(By.name("emailId")).sendKeys("test@example.com");
-        driver.findElement(By.name("password")).sendKeys("password");
-        driver.findElement(By.xpath("//button[contains(text(),'Giriş')]")).click();
+        waitForElementVisible(By.name("role")).sendKeys("Müşteri");
+        waitForElementVisible(By.name("emailId")).sendKeys("test@example.com");
+        waitForElementVisible(By.name("password")).sendKeys("password");
+        waitForElementVisible(By.xpath("//button[contains(text(),'Giriş')]")).click();
         Thread.sleep(2000);
     }
 
@@ -24,10 +24,10 @@ public class BookingTest extends BaseTest {
     public void testSearchCar() throws InterruptedException {
         driver.get(baseUrl + "/home");
 
-        Select companyFilter = new Select(driver.findElement(By.name("companyId")));
+        Select companyFilter = new Select(waitForElementVisible(By.name("companyId")));
         companyFilter.selectByIndex(1); // Select first company
 
-        driver.findElement(By.xpath("//button[contains(text(),'Ara')]")).click();
+        waitForElementVisible(By.xpath("//button[contains(text(),'Ara')]")).click();
         Thread.sleep(1000);
 
         // Verify results exist
@@ -45,11 +45,11 @@ public class BookingTest extends BaseTest {
         Thread.sleep(1000);
 
         // Fill dates
-        driver.findElement(By.name("startDate")).sendKeys("2024-12-25");
-        driver.findElement(By.name("endDate")).sendKeys("2024-12-28");
+        waitForElementVisible(By.name("startDate")).sendKeys("2024-12-25");
+        waitForElementVisible(By.name("endDate")).sendKeys("2024-12-28");
 
         // Book
-        driver.findElement(By.xpath("//input[@value='Araç Kirala']")).click();
+        waitForElementVisible(By.xpath("//input[@value='Araç Kirala']")).click();
         Thread.sleep(2000); // wait for success
 
         // Check "My Bookings"

@@ -14,11 +14,11 @@ public class AdminTest extends BaseTest {
     public void testAdminLogin() throws InterruptedException {
         driver.get(baseUrl + "/user/login");
 
-        driver.findElement(By.name("role")).sendKeys("Admin");
-        driver.findElement(By.name("emailId")).sendKeys("admin@demo.com"); // Assumes default admin
-        driver.findElement(By.name("password")).sendKeys("admin123");
+        waitForElementVisible(By.name("role")).sendKeys("Admin");
+        waitForElementVisible(By.name("emailId")).sendKeys("admin@demo.com"); // Assumes default admin
+        waitForElementVisible(By.name("password")).sendKeys("admin123");
 
-        driver.findElement(By.xpath("//button[contains(text(),'Giriş')]")).click();
+        waitForElementVisible(By.xpath("//button[contains(text(),'Giriş')]")).click();
 
         Thread.sleep(2000);
         assertTrue(driver.getCurrentUrl().contains("home"));

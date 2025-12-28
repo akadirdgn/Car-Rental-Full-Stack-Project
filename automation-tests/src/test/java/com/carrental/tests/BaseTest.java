@@ -2,7 +2,9 @@ package com.carrental.tests;
 
 import java.time.Duration;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
@@ -31,6 +33,11 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+    }
+
+    protected WebElement waitForElementVisible(By locator) {
+        return new org.openqa.selenium.support.ui.WebDriverWait(driver, Duration.ofSeconds(20))
+                .until(org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     @AfterMethod
