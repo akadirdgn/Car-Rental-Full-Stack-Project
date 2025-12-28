@@ -21,8 +21,11 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
-        // options.addArguments("--headless"); // Uncomment for CI/CD headless mode
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
         options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--window-size=1920,1080");
         options.addArguments("--start-maximized");
 
         driver = new ChromeDriver(options);

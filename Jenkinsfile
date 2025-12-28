@@ -69,7 +69,7 @@ pipeline {
                 bat 'docker-compose up -d --build'
                 
                 // Wait for services to be ready
-                sleep time: 30, unit: 'SECONDS'
+                sleep time: 60, unit: 'SECONDS'
             }
         }
 
