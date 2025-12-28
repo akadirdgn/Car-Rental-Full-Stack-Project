@@ -65,7 +65,10 @@ pipeline {
             steps {
                 echo 'Deploying to Docker...'
                 // Ensure docker-compose is installed
-                bat 'docker-compose down'
+                // Force remove any existing containers with these names (even if not part of this compose project)
+                // Using "|| exit 0" to suppress error if containers don't exist
+                bat 'docker rm -f car_rental_db car_rental_backend car_rental_frontend || exit 0'
+                bat 'docker-compose down --volumes'
                 bat 'docker-compose up -d --build'
                 
                 // Wait for services to be ready
