@@ -33,7 +33,7 @@ const HomePage = () => {
   const retrieveAllVariantByCompanyId = async () => {
     const response = await axios.get(
       "http://localhost:8080/api/variant/fetch/company-wise?companyId=" +
-        companyId
+      companyId
     );
     return response.data;
   };
@@ -84,6 +84,7 @@ const HomePage = () => {
             <select
               onChange={(e) => setTempCompanyId(e.target.value)}
               className="form-control"
+              name="companyId"
               required
             >
               <option value="">Araç Firmasını Seçin...</option>

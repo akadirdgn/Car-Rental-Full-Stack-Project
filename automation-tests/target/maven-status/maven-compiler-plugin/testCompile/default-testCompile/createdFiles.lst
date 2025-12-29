@@ -1,0 +1,7 @@
+com\carrental\tests\BaseTest.class
+com\carrental\pages\LoginPage.class
+com\carrental\pages\RegisterPage.class
+com\carrental\pages\AdminPage.class
+com\carrental\pages\HomePage.class
+com\carrental\pages\BasePage.class
+com\carrental\tests\AuthTest.class

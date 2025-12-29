@@ -36,14 +36,21 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-		http.csrf(csrf -> csrf.disable()).cors(cors -> cors.disable())
+		http.csrf(csrf -> csrf.disable())
+				.cors(cors -> cors.configurationSource(request -> {
+					var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
+					corsConfiguration.setAllowedOrigins(java.util.List.of("http://localhost:3000"));
+					corsConfiguration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+					corsConfiguration.setAllowedHeaders(java.util.List.of("*"));
+					return corsConfiguration;
+				}))
 
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/api/user/login", "/api/user/register", "/api/user/admin/register",
 								"/api/user/fetch/role-wise", "/api/user/fetch/user-id", "/api/user/*.jpg",
 								"/api/user/*.png", "/api/user/*.jpeg", "/api/company/fetch/all",
 								"/api/variant/fetch/**", "/api/variant/*.jpg", "/api/variant/*.png",
-								"/api/booking/fetch/all")
+								"/api/booking/fetch/all", "/api/car/rental/helper/**")
 						.permitAll()
 						.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
 						.anyRequest().authenticated())
