@@ -34,6 +34,12 @@ public class StorageServiceImpl implements StorageService {
 		String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 		System.out.println(ext);
 		String fileName = UUID.randomUUID().toString().replaceAll("-", "") + ext;
+
+		File directory = new File(VARIANT_IMAGE_BASEPATH);
+		if (!directory.exists()) {
+			directory.mkdirs();
+		}
+
 		File filePath = new File(VARIANT_IMAGE_BASEPATH, fileName);
 		try (FileOutputStream out = new FileOutputStream(filePath)) {
 			FileCopyUtils.copy(file.getInputStream(), out);
@@ -71,6 +77,12 @@ public class StorageServiceImpl implements StorageService {
 		String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 		System.out.println(ext);
 		String fileName = UUID.randomUUID().toString().replaceAll("-", "") + ext;
+
+		File directory = new File(LICENSE_IMAGE_BASEPATH);
+		if (!directory.exists()) {
+			directory.mkdirs();
+		}
+
 		File filePath = new File(LICENSE_IMAGE_BASEPATH, fileName);
 		try (FileOutputStream out = new FileOutputStream(filePath)) {
 			FileCopyUtils.copy(file.getInputStream(), out);

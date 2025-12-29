@@ -19,7 +19,12 @@ const UserProfile = () => {
 
   const retrieveUser = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/user/fetch/user-id?userId=" + customer.id
+      "http://localhost:8080/api/user/fetch/user-id?userId=" + customer.id,
+      {
+        headers: {
+          Authorization: "Bearer " + sessionStorage.getItem("customer-jwtToken"),
+        },
+      }
     );
     return response.data;
   };

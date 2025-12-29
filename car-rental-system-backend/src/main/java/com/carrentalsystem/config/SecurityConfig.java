@@ -40,7 +40,10 @@ public class SecurityConfig {
 
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/api/user/login", "/api/user/register", "/api/user/admin/register",
-								"/api/user/fetch/role-wise")
+								"/api/user/fetch/role-wise", "/api/user/fetch/user-id", "/api/user/*.jpg",
+								"/api/user/*.png", "/api/user/*.jpeg", "/api/company/fetch/all",
+								"/api/variant/fetch/**", "/api/variant/*.jpg", "/api/variant/*.png",
+								"/api/booking/fetch/all")
 						.permitAll()
 						.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
 						.anyRequest().authenticated())
