@@ -5,7 +5,7 @@ COPY pom.xml .
 RUN mvn dependency:go-offline -B
 
 COPY src ./src
-RUN mvn clean package -DskipTests -o -B
+RUN mvn clean package -DskipTests -B
 
 FROM amazoncorretto:17
 WORKDIR /app
