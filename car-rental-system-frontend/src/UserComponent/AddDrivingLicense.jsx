@@ -46,7 +46,12 @@ const AddDrivingLicense = () => {
     axios
       .post(
         "http://localhost:8080/api/user/add/driving-licence",
-        formData
+        formData,
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("customer-jwtToken"),
+          },
+        }
       )
       .then((resp) => {
         let response = resp.data;
