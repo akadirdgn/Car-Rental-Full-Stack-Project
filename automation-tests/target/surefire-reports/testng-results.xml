@@ -2,32 +2,32 @@
 <testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-12-30T20:53:02 TRT" name="Surefire suite" finished-at="2025-12-30T20:53:13 TRT" duration-ms="11027">
+  <suite started-at="2025-12-30T21:27:41 TRT" name="Surefire suite" finished-at="2025-12-30T21:27:51 TRT" duration-ms="10549">
     <groups>
     </groups>
-    <test started-at="2025-12-30T20:53:02 TRT" name="Surefire test" finished-at="2025-12-30T20:53:13 TRT" duration-ms="11027">
+    <test started-at="2025-12-30T21:27:41 TRT" name="Surefire test" finished-at="2025-12-30T21:27:51 TRT" duration-ms="10549">
       <class name="com.carrental.tests.AuthTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T20:53:02 TRT" name="setUp" finished-at="2025-12-30T20:53:03 TRT" duration-ms="1214" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T21:27:41 TRT" name="setUp" finished-at="2025-12-30T21:27:43 TRT" duration-ms="1786" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testCustomerLogin()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T20:53:03 TRT" name="testCustomerLogin" finished-at="2025-12-30T20:53:09 TRT" duration-ms="5522" status="PASS">
+        <test-method signature="testCustomerLogin()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T21:27:43 TRT" name="testCustomerLogin" finished-at="2025-12-30T21:27:48 TRT" duration-ms="5107" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCustomerLogin -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T20:53:09 TRT" name="tearDown" finished-at="2025-12-30T20:53:09 TRT" duration-ms="102" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T21:27:48 TRT" name="tearDown" finished-at="2025-12-30T21:27:48 TRT" duration-ms="107" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T20:53:09 TRT" name="setUp" finished-at="2025-12-30T20:53:10 TRT" duration-ms="679" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T21:27:48 TRT" name="setUp" finished-at="2025-12-30T21:27:49 TRT" duration-ms="589" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testCustomerRegistration()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T20:53:10 TRT" name="testCustomerRegistration" finished-at="2025-12-30T20:53:13 TRT" duration-ms="3403" status="PASS">
+        <test-method signature="testCustomerRegistration()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T21:27:49 TRT" name="testCustomerRegistration" finished-at="2025-12-30T21:27:51 TRT" duration-ms="2838" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testCustomerRegistration -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T20:53:13 TRT" name="tearDown" finished-at="2025-12-30T20:53:13 TRT" duration-ms="82" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.carrental.tests.AuthTest@6973bf95]" started-at="2025-12-30T21:27:51 TRT" name="tearDown" finished-at="2025-12-30T21:27:51 TRT" duration-ms="93" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

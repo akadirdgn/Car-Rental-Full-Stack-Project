@@ -76,12 +76,39 @@ pipeline {
             }
         }
 
-        stage('E2E Tests') {
+        stage('E2E: UI Smoke Tests') {
             steps {
                 dir('automation-tests') {
-                    echo 'Running Selenium E2E Tests...'
-                    // Run the TestNG suite
-                    bat 'mvn test'
+                    echo 'Running Common UI Tests...'
+                    bat 'mvn test -Dtest=CommonTests'
+                }
+            }
+             post {
+                always {
+                     junit 'automation-tests/target/surefire-reports/*.xml'
+                }
+            }
+        }
+
+        stage('E2E: Auth Boundary Tests') {
+            steps {
+                dir('automation-tests') {
+                    echo 'Running Auth Edge Cases...'
+                    bat 'mvn test -Dtest=AuthMoreTest'
+                }
+            }
+             post {
+                always {
+                     junit 'automation-tests/target/surefire-reports/*.xml'
+                }
+            }
+        }
+
+        stage('E2E: Full Auth Flows') {
+            steps {
+                dir('automation-tests') {
+                    echo 'Running Critical Auth Flows...'
+                    bat 'mvn test -Dtest=AuthTest'
                 }
             }
             post {
