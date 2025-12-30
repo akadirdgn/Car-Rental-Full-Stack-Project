@@ -31,7 +31,6 @@ public class RegisterPage extends BasePage {
         sendKeys(pincodeInput, pincode);
 
         scrollIntoView(waitForElementVisible(registerButton));
-        // Small delay if needed via explicit wait, but let's trust visibility
         jsClick(registerButton);
     }
 
