@@ -1,4 +1,3 @@
-# Backend Dockerfile - Simplified for Local Build
 FROM amazoncorretto:17
 WORKDIR /app
 # Copy the JAR file built locally by 'mvn clean package'
