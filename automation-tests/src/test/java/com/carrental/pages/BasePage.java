@@ -37,8 +37,6 @@ public class BasePage {
 
     protected void sendKeys(By locator, String text) {
         WebElement element = waitForElementVisible(locator);
-        // element.clear(); // Removing clear() as it causes
-        // InvalidElementStateException for some inputs
         element.sendKeys(text);
     }
 
