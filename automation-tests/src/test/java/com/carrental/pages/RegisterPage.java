@@ -38,4 +38,14 @@ public class RegisterPage extends BasePage {
     public void goToRegister(String baseUrl) {
         driver.get(baseUrl + "/user/customer/register");
     }
+
+    private By adminRegisterButton = By.xpath("//button[@type='submit']");
+
+    public void registerAdmin(String email, String password) {
+        System.out.println("DEBUG: Registering Admin with Email: " + email);
+        sendKeys(emailInput, email);
+        sendKeys(passwordInput, password);
+        System.out.println("DEBUG: Clicking Admin Register Button");
+        jsClick(adminRegisterButton);
+    }
 }

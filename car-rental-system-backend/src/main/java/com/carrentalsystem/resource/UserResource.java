@@ -422,7 +422,7 @@ public class UserResource {
 		DrivingLicense addedLicense = this.drivingLicenseService.addLicense(license);
 
 		if (addedLicense == null) {
-			throw new UserSaveFailedException("Sürücü belgesi kaydedilemedi!!!");
+			throw new UserSaveFailedException("Sürücü belgesi kaydedilemedi!");
 		}
 
 		customer.setLicense(addedLicense);
@@ -430,10 +430,10 @@ public class UserResource {
 		User updatedCustomer = this.userService.updateUser(customer);
 
 		if (updatedCustomer == null) {
-			throw new UserSaveFailedException("Sürücü belgesi kaydedilemedi!!!");
+			throw new UserSaveFailedException("Sürücü belgesi kaydedilemedi!");
 		}
 
-		response.setResponseMessage("Müşteri Sürücü Belgesi Başarıyla Eklendi!!!");
+		response.setResponseMessage("Müşteri Sürücü Belgesi Başarıyla Eklendi.");
 		response.setSuccess(true);
 
 		LOG.info("Response Sent!!!");

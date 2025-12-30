@@ -53,4 +53,16 @@ public class BasePage {
     public String getPageSource() {
         return driver.getPageSource();
     }
+
+    protected void selectByValue(By locator, String value) {
+        org.openqa.selenium.support.ui.Select select = new org.openqa.selenium.support.ui.Select(
+                waitForElementVisible(locator));
+        select.selectByValue(value);
+    }
+
+    protected void selectByVisibleText(By locator, String text) {
+        org.openqa.selenium.support.ui.Select select = new org.openqa.selenium.support.ui.Select(
+                waitForElementVisible(locator));
+        select.selectByVisibleText(text);
+    }
 }
