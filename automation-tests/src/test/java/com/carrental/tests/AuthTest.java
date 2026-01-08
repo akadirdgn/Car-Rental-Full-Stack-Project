@@ -43,5 +43,5 @@ public class AuthTest extends BaseTest {
 
         Thread.sleep(2000);
         assertTrue(loginPage.getCurrentUrl().contains("home"));
-    }
+    
 }
