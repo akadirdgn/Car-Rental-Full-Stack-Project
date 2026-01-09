@@ -2,7 +2,6 @@ com\carrental\tests\AuthMoreTest.class
 com\carrental\tests\BaseTest.class
 com\carrental\pages\LoginPage.class
 com\carrental\pages\RegisterPage.class
-com\carrental\tests\BookingTest.class
 com\carrental\tests\CommonTests.class
 com\carrental\pages\BasePage.class
 com\carrental\tests\AuthTest.class

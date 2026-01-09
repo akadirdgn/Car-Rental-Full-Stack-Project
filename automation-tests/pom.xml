@@ -46,21 +46,22 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
-          <!-- Generate JUnit-compatible XML reports -->
+          <!-- Disable all TestNG native reporters, use only JUnit format -->
           <properties>
             <property>
               <name>usedefaultlisteners</name>
-              <value>true</value>
+              <value>false</value>
             </property>
             <property>
               <name>listener</name>
               <value>org.testng.reporters.JUnitReportReporter</value>
             </property>
           </properties>
-          <!-- Ensure test results are always generated -->
+          <!-- Continue on test failures to generate reports -->
           <testFailureIgnore>false</testFailureIgnore>
-          <!-- Force rerun to rebuild reports -->
-          <rerunFailingTestsCount>0</rerunFailingTestsCount>
+          <!-- Use simple report format -->
+          <useFile>true</useFile>
+          <disableXmlReport>false</disableXmlReport>
         </configuration>
       </plugin>
       <plugin>
