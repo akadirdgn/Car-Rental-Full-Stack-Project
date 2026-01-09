@@ -16,6 +16,8 @@ const AddCompanyForm = () => {
   };
 
   const addCompany = (e) => {
+    e.preventDefault();
+    
     fetch("http://localhost:8080/api/company/add", {
       method: "POST",
       headers: {
@@ -26,37 +28,50 @@ const AddCompanyForm = () => {
     })
       .then((result) => {
         console.log("result", result);
-        result.json().then((res) => {
-          if (res.success) {
-            toast.success(res.responseMessage, {
-              position: "top-center",
-              autoClose: 1000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
+        
+        // Check if response is ok and has content
+        if (!result.ok) {
+          throw new Error(`HTTP error! status: ${result.status}`);
+        }
+        
+        // Check if response has JSON content
+        const contentType = result.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("Response is not JSON");
+        }
+        
+        return result.json();
+      })
+      .then((res) => {
+        if (res.success) {
+          toast.success(res.responseMessage, {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
 
-            setTimeout(() => {
-              navigate("/home");
-            }, 2000); // Redirect after 3 seconds
-          } else {
-            toast.error(res.responseMessage, {
-              position: "top-center",
-              autoClose: 1000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-          }
-        });
+          setTimeout(() => {
+            navigate("/home");
+          }, 2000); // Redirect after 2 seconds
+        } else {
+          toast.error(res.responseMessage, {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
       })
       .catch((error) => {
-        console.error(error);
-        toast.error("It seems server is down", {
+        console.error("Error adding company:", error);
+        toast.error("It seems server is down or network error occurred", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: false,
@@ -66,7 +81,6 @@ const AddCompanyForm = () => {
           progress: undefined,
         });
       });
-    e.preventDefault();
   };
 
   return (

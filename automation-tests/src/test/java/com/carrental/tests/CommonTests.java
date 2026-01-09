@@ -14,10 +14,14 @@ public class CommonTests extends BaseTest {
     // Scenario 1: Check Home Page Title
     @Test
     public void testHomePageTitle() {
-        driver.get(baseUrl + "/home");
-        String title = driver.getTitle();
-        // Assuming title contains something relevant
-        assertTrue(title != null && !title.isEmpty(), "Title should not be empty");
+        try {
+            driver.get(baseUrl + "/home");
+            String title = driver.getTitle();
+            // Assuming title contains something relevant
+            assertTrue(title != null && !title.isEmpty(), "Title should not be empty");
+        } catch (org.openqa.selenium.TimeoutException e) {
+            throw new AssertionError("Page load timeout - application may not be running at " + baseUrl, e);
+        }
     }
 
     // Scenario 2: Navigate to Login Page from URL
