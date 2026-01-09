@@ -61,7 +61,7 @@ public class BookingResource {
 
 		if (request == null || request.getStartDate() == null || request.getEndDate() == null
 				|| request.getCustomerId() == null || request.getVehicleId() == null) {
-			response.setResponseMessage("bad request - invalid request");
+			response.setResponseMessage("Geçersiz istek - eksik bilgi.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -70,7 +70,7 @@ public class BookingResource {
 		Variant variant = this.variantService.getById(request.getVehicleId());
 
 		if (variant == null) {
-			response.setResponseMessage("bad request - variant not found");
+			response.setResponseMessage("Geçersiz istek - varyant bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -79,7 +79,7 @@ public class BookingResource {
 		User customer = this.userService.getUserById(request.getCustomerId());
 
 		if (customer == null) {
-			response.setResponseMessage("bad request - customer not found");
+			response.setResponseMessage("Geçersiz istek - müşteri bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -111,10 +111,10 @@ public class BookingResource {
 		Booking addedBooking = this.bookingService.addBooking(booking);
 
 		if (addedBooking == null) {
-			throw new BookingSaveFailedException("failed to book for vehicle rent");
+			throw new BookingSaveFailedException("Araç kiralama işlemi başarısız oldu.");
 		}
 
-		response.setResponseMessage("Booking Added Successful!!!");
+		response.setResponseMessage("Rezervasyon başarıyla oluşturuldu.");
 		response.setSuccess(true);
 
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
@@ -133,14 +133,14 @@ public class BookingResource {
 		List<Booking> bookings = this.bookingService.getAllBookings();
 
 		if (bookings == null) {
-			response.setResponseMessage("bookings not found");
+			response.setResponseMessage("Rezervasyon bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<BookingResponse>(response, HttpStatus.OK);
 		}
 
 		response.setBookings(bookings);
-		response.setResponseMessage("Booking Fetched Successful!!!");
+		response.setResponseMessage("Rezervasyonlar başarıyla getirildi.");
 		response.setSuccess(true);
 
 		return new ResponseEntity<BookingResponse>(response, HttpStatus.OK);
@@ -153,7 +153,7 @@ public class BookingResource {
 		BookingResponse response = new BookingResponse();
 
 		if (customerId == null) {
-			response.setResponseMessage("bad request - customer id missing");
+			response.setResponseMessage("Geçersiz istek - müşteri ID eksik.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<BookingResponse>(response, HttpStatus.OK);
@@ -162,7 +162,7 @@ public class BookingResource {
 		User customer = this.userService.getUserById(customerId);
 
 		if (customer == null) {
-			response.setResponseMessage("bad request - customer not found");
+			response.setResponseMessage("Geçersiz istek - müşteri bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<BookingResponse>(response, HttpStatus.OK);
@@ -171,14 +171,14 @@ public class BookingResource {
 		List<Booking> bookings = this.bookingService.getByCustomer(customer);
 
 		if (bookings == null) {
-			response.setResponseMessage("bookings not found");
+			response.setResponseMessage("Rezervasyon bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<BookingResponse>(response, HttpStatus.OK);
 		}
 
 		response.setBookings(bookings);
-		response.setResponseMessage("Booking Fetched Successful!!!");
+		response.setResponseMessage("Rezervasyonlar başarıyla getirildi.");
 		response.setSuccess(true);
 
 		return new ResponseEntity<BookingResponse>(response, HttpStatus.OK);
@@ -191,14 +191,14 @@ public class BookingResource {
 		CommonApiResponse response = new CommonApiResponse();
 
 		if (request == null || request.getBookingId() == null || request.getStatus() == null) {
-			response.setResponseMessage("bad request - invalid request");
+			response.setResponseMessage("Geçersiz istek - eksik bilgi.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
 
 		if (request.getStatus().equals(BookingStatus.APPROVED.value()) && request.getVehicleId() == null) {
-			response.setResponseMessage("Please assign Vehicle for the Booking!!!");
+			response.setResponseMessage("Lütfen rezervasyon için araç atayın.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -207,7 +207,7 @@ public class BookingResource {
 		Booking booking = this.bookingService.getById(request.getBookingId());
 
 		if (booking == null) {
-			response.setResponseMessage("booking not found!!!");
+			response.setResponseMessage("Rezervasyon bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -225,10 +225,10 @@ public class BookingResource {
 		Booking addedBooking = this.bookingService.updateBooking(booking);
 
 		if (addedBooking == null) {
-			throw new BookingSaveFailedException("failed to update the booking");
+			throw new BookingSaveFailedException("Rezervasyon güncellenemedi.");
 		}
 
-		response.setResponseMessage("Booking Updated Successful!!!");
+		response.setResponseMessage("Rezervasyon başarıyla güncellendi.");
 		response.setSuccess(true);
 
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
@@ -242,7 +242,7 @@ public class BookingResource {
 
 		if (request == null || request.getBookingId() == null || request.getCardNo() == null || request.getCvv() == null
 				|| request.getExpiryDate() == null || request.getNameOnCard() == null) {
-			response.setResponseMessage("bad request - invalid request");
+			response.setResponseMessage("Geçersiz istek - eksik bilgi.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -251,7 +251,7 @@ public class BookingResource {
 		Booking booking = this.bookingService.getById(request.getBookingId());
 
 		if (booking == null) {
-			response.setResponseMessage("booking not found!!!");
+			response.setResponseMessage("Rezervasyon bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -274,7 +274,7 @@ public class BookingResource {
 		Payment addedPayment = this.paymentService.addPayment(payment);
 
 		if (addedPayment == null) {
-			throw new BookingSaveFailedException("Payment Failed for Booking!!!");
+			throw new BookingSaveFailedException("Rezervasyon için ödeme başarısız oldu.");
 		}
 
 		booking.setPayment(addedPayment);
@@ -282,10 +282,10 @@ public class BookingResource {
 		Booking addedBooking = this.bookingService.updateBooking(booking);
 
 		if (addedBooking == null) {
-			throw new BookingSaveFailedException("Payment Failed for Booking!!!");
+			throw new BookingSaveFailedException("Rezervasyon için ödeme başarısız oldu.");
 		}
 
-		response.setResponseMessage("Congratulations!!! Payment Successful, Booking Confirmed!!!");
+		response.setResponseMessage("Ödeme başarılı, rezervasyon onaylandı.");
 		response.setSuccess(true);
 
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
@@ -298,7 +298,7 @@ public class BookingResource {
 		CommonApiResponse response = new CommonApiResponse();
 
 		if (request == null || request.getBookingId() == null || request.getStatus() == null) {
-			response.setResponseMessage("bad request - invalid request");
+			response.setResponseMessage("Geçersiz istek - eksik bilgi.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -307,7 +307,7 @@ public class BookingResource {
 		Booking booking = this.bookingService.getById(request.getBookingId());
 
 		if (booking == null) {
-			response.setResponseMessage("booking not found!!!");
+			response.setResponseMessage("Rezervasyon bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -318,10 +318,10 @@ public class BookingResource {
 		Booking addedBooking = this.bookingService.updateBooking(booking);
 
 		if (addedBooking == null) {
-			throw new BookingSaveFailedException("failed to cancel the booking");
+			throw new BookingSaveFailedException("Rezervasyon iptal edilemedi.");
 		}
 
-		response.setResponseMessage("Booking Cancelled Successful!!!");
+		response.setResponseMessage("Rezervasyon başarıyla iptal edildi.");
 		response.setSuccess(true);
 
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);

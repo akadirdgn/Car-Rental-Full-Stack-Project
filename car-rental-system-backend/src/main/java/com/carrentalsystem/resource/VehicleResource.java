@@ -22,49 +22,49 @@ import com.carrentalsystem.utility.Constants.ActiveStatus;
 
 @Component
 public class VehicleResource {
-	
+
 	private final Logger LOG = LoggerFactory.getLogger(VehicleResource.class);
 
 	@Autowired
 	private VehicleService vehicleService;
-	
+
 	@Autowired
 	private VariantService variantService;
-	
+
 	public ResponseEntity<CommonApiResponse> addVehicle(AddVehicleRequest request) {
-		
+
 		LOG.info("Request recieved for add vehicle");
-		
+
 		CommonApiResponse response = new CommonApiResponse();
-		
-		if(request == null || request.getRegistrationNumber() == null || request.getVariantId() == null) {
-			response.setResponseMessage("bad request - invalid request");
+
+		if (request == null || request.getRegistrationNumber() == null || request.getVariantId() == null) {
+			response.setResponseMessage("Geçersiz istek - eksik bilgi.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
-		
+
 		Variant variant = this.variantService.getById(request.getVariantId());
-		
-		if(variant == null) {
-			response.setResponseMessage("bad request - variant not found");
+
+		if (variant == null) {
+			response.setResponseMessage("Geçersiz istek - varyant bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
-		
+
 		Vehicle vehicle = new Vehicle();
 		vehicle.setRegistrationNumber(request.getRegistrationNumber());
 		vehicle.setVariant(variant);
 		vehicle.setStatus(ActiveStatus.ACTIVE.value());
-		
+
 		Vehicle addVehicle = this.vehicleService.addVehicle(vehicle);
-		
-		if(addVehicle == null) {
-			throw new VehicleSaveFailedException("failed to add vehicle!!!");
+
+		if (addVehicle == null) {
+			throw new VehicleSaveFailedException("Araç eklenemedi.");
 		}
-		
-		response.setResponseMessage("Vehicle Added successful!!!");
+
+		response.setResponseMessage("Araç başarıyla eklendi.");
 		response.setSuccess(true);
 
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
@@ -79,14 +79,14 @@ public class VehicleResource {
 		List<Vehicle> vehicles = this.vehicleService.getByStatus(ActiveStatus.ACTIVE.value());
 
 		if (CollectionUtils.isEmpty(vehicles)) {
-			response.setResponseMessage("No Vehicles Found!!!");
+			response.setResponseMessage("Araç bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<VehicleResponse>(response, HttpStatus.OK);
 		}
 
 		response.setVehicles(vehicles);
-		response.setResponseMessage("Vehicles Fetched Successful!!!");
+		response.setResponseMessage("Araçlar başarıyla getirildi.");
 		response.setSuccess(true);
 
 		return new ResponseEntity<VehicleResponse>(response, HttpStatus.OK);
@@ -98,18 +98,18 @@ public class VehicleResource {
 		LOG.info("Request received for fetching all vehicles by variant id");
 
 		VehicleResponse response = new VehicleResponse();
-		
-		if(variantId == null) {
-			response.setResponseMessage("bad request - variant id missing");
+
+		if (variantId == null) {
+			response.setResponseMessage("Geçersiz istek - varyant ID eksik.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<VehicleResponse>(response, HttpStatus.OK);
 		}
-		
-        Variant variant = this.variantService.getById(variantId);
-		
-		if(variant == null) {
-			response.setResponseMessage("bad request - variant not found");
+
+		Variant variant = this.variantService.getById(variantId);
+
+		if (variant == null) {
+			response.setResponseMessage("Geçersiz istek - varyant bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<VehicleResponse>(response, HttpStatus.BAD_REQUEST);
@@ -118,14 +118,14 @@ public class VehicleResource {
 		List<Vehicle> vehicles = this.vehicleService.getByVariantAndStatus(variant, ActiveStatus.ACTIVE.value());
 
 		if (CollectionUtils.isEmpty(vehicles)) {
-			response.setResponseMessage("No Vehicles Found!!!");
+			response.setResponseMessage("Araç bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<VehicleResponse>(response, HttpStatus.OK);
 		}
 
 		response.setVehicles(vehicles);
-		response.setResponseMessage("Vehicles Fetched Successful!!!");
+		response.setResponseMessage("Araçlar başarıyla getirildi.");
 		response.setSuccess(true);
 
 		return new ResponseEntity<VehicleResponse>(response, HttpStatus.OK);
@@ -133,22 +133,22 @@ public class VehicleResource {
 	}
 
 	public ResponseEntity<CommonApiResponse> updateVehicle(AddVehicleRequest request) {
-		
+
 		LOG.info("Request recieved for update vehicle");
-		
+
 		CommonApiResponse response = new CommonApiResponse();
-		
-		if(request == null || request.getVehicleId() == null) {
-			response.setResponseMessage("bad request - invalid request");
+
+		if (request == null || request.getVehicleId() == null) {
+			response.setResponseMessage("Geçersiz istek - eksik bilgi.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
-		
+
 		Vehicle vehicle = this.vehicleService.getById(request.getVehicleId());
-		
-		if(vehicle == null) {
-			response.setResponseMessage("bad request - vaehicle not found");
+
+		if (vehicle == null) {
+			response.setResponseMessage("Geçersiz istek - araç bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -156,50 +156,50 @@ public class VehicleResource {
 
 		vehicle.setRegistrationNumber(request.getRegistrationNumber());
 		vehicle.setStatus(ActiveStatus.ACTIVE.value());
-		
+
 		Vehicle addVehicle = this.vehicleService.updateVehicle(vehicle);
-		
-		if(addVehicle == null) {
-			throw new VehicleSaveFailedException("failed to updated vehicle!!!");
+
+		if (addVehicle == null) {
+			throw new VehicleSaveFailedException("Araç güncellenemedi.");
 		}
-		
-		response.setResponseMessage("Vehicle Updated successful!!!");
+
+		response.setResponseMessage("Araç başarıyla güncellendi.");
 		response.setSuccess(true);
 
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
 	}
 
 	public ResponseEntity<CommonApiResponse> deleteVehicle(Integer vehicleId) {
-		
+
 		LOG.info("Request recieved for delete vehicle");
-		
+
 		CommonApiResponse response = new CommonApiResponse();
-		
-		if(vehicleId == null) {
-			response.setResponseMessage("bad request - vehicle id not found");
+
+		if (vehicleId == null) {
+			response.setResponseMessage("Geçersiz istek - araç ID bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
-		
+
 		Vehicle vehicle = this.vehicleService.getById(vehicleId);
-		
-		if(vehicle == null) {
-			response.setResponseMessage("bad request - vaehicle not found");
+
+		if (vehicle == null) {
+			response.setResponseMessage("Geçersiz istek - araç bulunamadı.");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
 
 		vehicle.setStatus(ActiveStatus.DEACTIVATED.value());
-		
+
 		Vehicle addVehicle = this.vehicleService.updateVehicle(vehicle);
-		
-		if(addVehicle == null) {
-			throw new VehicleSaveFailedException("failed to delete vehicle!!!");
+
+		if (addVehicle == null) {
+			throw new VehicleSaveFailedException("Araç silinemedi.");
 		}
-		
-		response.setResponseMessage("Vehicle Deleted successful!!!");
+
+		response.setResponseMessage("Araç başarıyla silindi.");
 		response.setSuccess(true);
 
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
