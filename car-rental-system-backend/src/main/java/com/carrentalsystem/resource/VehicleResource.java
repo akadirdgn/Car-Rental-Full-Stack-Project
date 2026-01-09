@@ -38,7 +38,7 @@ public class VehicleResource {
 		CommonApiResponse response = new CommonApiResponse();
 
 		if (request == null || request.getRegistrationNumber() == null || request.getVariantId() == null) {
-			response.setResponseMessage("Geçersiz istek - eksik bilgi.");
+			response.setResponseMessage("bad request - invalid request");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
@@ -47,7 +47,7 @@ public class VehicleResource {
 		Variant variant = this.variantService.getById(request.getVariantId());
 
 		if (variant == null) {
-			response.setResponseMessage("Geçersiz istek - varyant bulunamadı.");
+			response.setResponseMessage("bad request - variant not found");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);

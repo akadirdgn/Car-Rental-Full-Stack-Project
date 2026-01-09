@@ -34,8 +34,7 @@ const ViewVariantDetail = () => {
   });
 
   const handleBookingInput = (e) => {
-    const { name, value } = e.target;
-    setBooking((prev) => ({ ...prev, [name]: value }));
+    setBooking({ ...booking, [e.target.name]: e.target.value });
   };
 
   const retrieveVariant = async () => {

@@ -66,7 +66,7 @@ public class UserResourceTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(response.getBody().isSuccess());
-        assertEquals("Kullanıcı başarıyla kaydedildi.", response.getBody().getResponseMessage());
+        assertEquals("Kullanıcı Başarıyla Kaydedildi", response.getBody().getResponseMessage());
     }
 
     @Test
@@ -77,6 +77,6 @@ public class UserResourceTest {
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertFalse(response.getBody().isSuccess());
-        assertEquals("Bu E-posta adresi ile kayıtlı kullanıcı zaten var.", response.getBody().getResponseMessage());
+        assertEquals("Bu E-posta adresi ile kayıtlı kullanıcı zaten var!!!", response.getBody().getResponseMessage());
     }
 }

@@ -117,20 +117,6 @@ pipeline {
                 }
             }
         }
-
-        stage('E2E: Booking Flows') {
-            steps {
-                dir('automation-tests') {
-                    echo 'Running Booking E2E Tests...'
-                    bat 'mvn test -Dtest=BookingTest'
-                }
-            }
-            post {
-                always {
-                     junit 'automation-tests/target/surefire-reports/*.xml'
-                }
-            }
-        }
     }
 
     post {

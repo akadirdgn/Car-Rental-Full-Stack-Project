@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="CarRental Automation Suite" parallel="false">
+
+    <test name="UI Tests">
+        <classes>
+            <class name="com.carrental.tests.AuthTest"/>
+            <class name="com.carrental.tests.AdminTest"/>
+            <class name="com.carrental.tests.BookingTest"/>
+        </classes>
+    </test>
+
+</suite>
