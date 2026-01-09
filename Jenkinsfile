@@ -80,7 +80,7 @@ pipeline {
             steps {
                 dir('automation-tests') {
                     echo 'Running Common UI Tests...'
-                    bat 'mvn test -Dtest=CommonTests'
+                    bat 'mvn clean test -Dtest=CommonTests'
                 }
             }
              post {
@@ -94,7 +94,7 @@ pipeline {
             steps {
                 dir('automation-tests') {
                     echo 'Running Auth Edge Cases...'
-                    bat 'mvn test -Dtest=AuthMoreTest'
+                    bat 'mvn clean test -Dtest=AuthMoreTest'
                 }
             }
              post {
@@ -108,7 +108,7 @@ pipeline {
             steps {
                 dir('automation-tests') {
                     echo 'Running Critical Auth Flows...'
-                    bat 'mvn test -Dtest=AuthTest'
+                    bat 'mvn clean test -Dtest=AuthTest'
                 }
             }
             post {
