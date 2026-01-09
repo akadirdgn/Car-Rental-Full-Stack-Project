@@ -53,12 +53,14 @@
               <value>true</value>
             </property>
             <property>
-              <name>reporter</name>
-              <value>listenReport.Reporter</value>
+              <name>listener</name>
+              <value>org.testng.reporters.JUnitReportReporter</value>
             </property>
           </properties>
           <!-- Ensure test results are always generated -->
           <testFailureIgnore>false</testFailureIgnore>
+          <!-- Force rerun to rebuild reports -->
+          <rerunFailingTestsCount>0</rerunFailingTestsCount>
         </configuration>
       </plugin>
       <plugin>
