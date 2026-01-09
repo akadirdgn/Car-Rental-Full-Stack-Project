@@ -17,6 +17,7 @@ public class AuthTest extends BaseTest {
         String email = "testuser" + System.currentTimeMillis() + "@example.com";
         registerPage.register("Test", "User", email, "password123", "1234567890", "Main St", "Istanbul", "34000");
 
+        // Wait a bit for redirect
         Thread.sleep(2000);
         String currentUrl = registerPage.getCurrentUrl();
         // Depending on success, it might redirect to login or stay
