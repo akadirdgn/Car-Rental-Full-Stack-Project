@@ -8,8 +8,6 @@ pipeline {
         FRONTEND_CONTAINER_NAME = "car_rental_frontend"
         // Force CI to false to ignore CRA warnings
         CI = 'false'
-        // Disable ESLint plugin to prevent warnings from failing/marking build as unstable
-        DISABLE_ESLINT_PLUGIN = 'true'
     }
 
     stages {
@@ -119,7 +117,6 @@ pipeline {
                 }
             }
         }
-    }
 
     post {
         always {
