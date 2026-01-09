@@ -23,7 +23,6 @@ pipeline {
                 script {
                     echo 'Building Backend...'
                     dir('car-rental-system-backend') {
-                        // Assuming running on Windows agent or container with Maven
                          bat 'mvn clean package -DskipTests'
                     }
                     
@@ -54,8 +53,7 @@ pipeline {
              steps {
                 dir('car-rental-system-backend') {
                     echo 'Running Backend Integration Tests...'
-                    // Typically 'mvn verify' runs integration tests (failsafe plugin)
-                    // Ensuring we run the UserResourceTest we created
+
                      bat 'mvn verify -DskipUnitTests' 
                 }
             }
