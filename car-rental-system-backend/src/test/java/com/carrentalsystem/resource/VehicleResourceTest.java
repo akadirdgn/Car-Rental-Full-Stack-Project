@@ -66,7 +66,7 @@ public class VehicleResourceTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(response.getBody().isSuccess());
-        assertEquals("Vehicle Added successful!!!", response.getBody().getResponseMessage());
+        assertEquals("Araç başarıyla eklendi.", response.getBody().getResponseMessage());
     }
 
     @Test

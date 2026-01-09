@@ -85,6 +85,6 @@ public class BookingResourceTest {
         // The implementation returns OK with success=false message
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(false, response.getBody().isSuccess());
-        assertEquals("bad request - customer not found", response.getBody().getResponseMessage());
+        assertEquals("Geçersiz istek - müşteri bulunamadı.", response.getBody().getResponseMessage());
     }
 }
